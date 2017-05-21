@@ -1,12 +1,9 @@
- 
-INSERT INTO credentials(username,password,enabled) VALUES ('guest','$2a$10$0.ESlGysrPaiW5HaapKwoehzWt5AibgbPPOvMhDv8D6H26QQ/CwhS', TRUE);
-INSERT INTO credentials(username,password,enabled) VALUES ('admin','$2a$10$S/wlXEo/APzf.Sn1cO2p4.V12EJmaw.uzrHelMvkpuahjmHWnSafe', TRUE);
+INSERT INTO credential(username,password,enabled) VALUES ('guest','$2a$10$0.ESlGysrPaiW5HaapKwoehzWt5AibgbPPOvMhDv8D6H26QQ/CwhS', TRUE);
+INSERT INTO credential(username,password,enabled) VALUES ('admin','$2a$10$S/wlXEo/APzf.Sn1cO2p4.V12EJmaw.uzrHelMvkpuahjmHWnSafe', TRUE);
  
 INSERT INTO authority (username, authority) VALUES ('guest', 'ROLE_USER');
 INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_ADMIN');
 INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_USER');
 
-INSERT INTO  `MEMBER` (firstname, lastname,age,title,membernumber, member_id) VALUES ('Tuyen','Lam',12,'Admin', 8754,'admin');
-INSERT INTO `MEMBER` (firstname, lastname,age,title,membernumber,member_id) VALUES ('Guest','Guest',123,'Guest', 8733,'guest');
-
-					
+INSERT INTO `MEMBER` (firstname, lastname, nickname, email, gender, credential_id) VALUES ('Tuyen', 'Lam', 'Tien' ,'tuyenrg@gmail.com', 0 ,'admin');
+INSERT INTO `MEMBER` (firstname, lastname, nickname, email, gender, credential_id) VALUES ('Guest', 'Guest', 'Guest' ,'guest@gmail.com', 0, 'guest');
