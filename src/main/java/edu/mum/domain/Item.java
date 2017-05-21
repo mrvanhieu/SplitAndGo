@@ -17,24 +17,24 @@ public class Item {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	private Integer type;
-	
+	private ItemType type;
+
 	@Column(length = 20)
 	@EmptyOrSize(min = 2, max = 20, message = "{size.name.validation}")
 	private String name;
-	
+
 	@Column(length = 200)
 	@EmptyOrSize(min = 4, max = 200, message = "{size.name.validation}")
 	private String description;
-	
+
 	@NotNull(message = "{notnull}")
 	private Double price;
-	
+
 	private Integer quantity;
 
 	@ManyToOne
 	private Payment payment;
-	
+
 	public long getId() {
 		return id;
 	}
@@ -43,11 +43,11 @@ public class Item {
 		this.id = id;
 	}
 
-	public Integer getType() {
+	public ItemType getType() {
 		return type;
 	}
 
-	public void setType(Integer type) {
+	public void setType(ItemType type) {
 		this.type = type;
 	}
 

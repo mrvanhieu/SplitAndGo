@@ -32,18 +32,18 @@ public class Member {
 	@Column(length = 20)
 	@EmptyOrSize(min = 2, max = 20, message = "{size.name.validation}")
 	private String lastName;
-	
+
 	@Column(length = 20)
 	private String nickName;
 
-	private Integer gender;
+	private Gender gender;
 
 	@Email
 	private String email;
 
 	@Pattern(regexp = "\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")
 	private String phone;
-	
+
 	@DateTimeFormat(pattern = "MM-dd-yyyy")
 	private Date birthDate;
 
@@ -84,11 +84,11 @@ public class Member {
 		this.nickName = nickName;
 	}
 
-	public Integer getGender() {
+	public Gender getGender() {
 		return gender;
 	}
 
-	public void setGender(Integer gender) {
+	public void setGender(Gender gender) {
 		this.gender = gender;
 	}
 
