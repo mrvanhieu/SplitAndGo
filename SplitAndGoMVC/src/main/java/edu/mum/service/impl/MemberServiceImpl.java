@@ -35,9 +35,9 @@ public class MemberServiceImpl implements MemberService {
 		memberDao.save(member);
 	}
 
-	public void update(Member member) {
+	public Member update(Member member) {
 		updateAuthorities(member.getCredential().getAuthorityList(), member.getCredential().getAuthorities());
-		memberDao.update(member);
+		return memberDao.update(member);
 	}
 
 	private void updateAuthorities(List<String> authorityStrList, List<Authority> authorities) {
