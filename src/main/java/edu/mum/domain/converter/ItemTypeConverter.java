@@ -10,6 +10,10 @@ public class ItemTypeConverter implements AttributeConverter<ItemType, String> {
 
 	@Override
 	public String convertToDatabaseColumn(ItemType itemType) {
+		if (itemType == null) {
+			return null;
+		}
+
 		switch (itemType) {
 		case FOOD:
 			return "Food";
@@ -24,6 +28,10 @@ public class ItemTypeConverter implements AttributeConverter<ItemType, String> {
 
 	@Override
 	public ItemType convertToEntityAttribute(String fromDatabase) {
+		if (fromDatabase == null) {
+			return null;
+		}
+		
 		switch (fromDatabase) {
 		case "Food":
 			return ItemType.FOOD;

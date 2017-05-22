@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -49,6 +50,9 @@ public class Trip {
 
 	@OneToOne(mappedBy="trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	Fund fund;
+	
+	@OneToMany(mappedBy = "trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	List<Payment> payments = new ArrayList<>();
 	
 	public long getId() {
 		return id;
@@ -112,6 +116,14 @@ public class Trip {
 
 	public void setFund(Fund fund) {
 		this.fund = fund;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
 	}
 
 }

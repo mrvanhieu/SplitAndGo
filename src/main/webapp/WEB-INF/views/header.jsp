@@ -22,6 +22,10 @@
 							<li><a href="#"><spring:message code="menu.trip.members" /></a></li>
 							<li><a href="#"><spring:message code="menu.trip.fund" /></a></li>
 						</ul></li>
+					<security:authorize access="hasRole('ROLE_ADMIN')">
+					<li><a href="<spring:url value="/members" />"><spring:message
+								code="menu.membermanagement" /></a></li>
+					</security:authorize>
 					<li><a href="<spring:url value="/" />"><spring:message
 								code="menu.payment" /></a></li>
 				</security:authorize>

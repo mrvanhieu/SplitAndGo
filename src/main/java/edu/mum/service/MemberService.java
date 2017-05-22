@@ -10,8 +10,12 @@ public interface MemberService {
 
 	public void saveFull(Member member);
 
+	public void update(Member member);
+		
 	public List<Member> findAll();
 
 	public Member findOne(Long id);
+	
+	public void delete(Long id);
 
 }

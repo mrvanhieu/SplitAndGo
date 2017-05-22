@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
@@ -41,10 +43,11 @@ public class Member {
 	@Email
 	private String email;
 
-	@Pattern(regexp = "\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")
+	@Pattern(regexp = "(\\d{3}[-\\.\\s]?\\d{3}[-\\.\\s]?\\d{4})*")
 	private String phone;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 
 	@OneToOne(cascade = CascadeType.ALL)

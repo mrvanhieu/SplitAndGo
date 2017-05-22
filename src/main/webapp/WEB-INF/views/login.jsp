@@ -10,6 +10,7 @@
 
 <link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" />
+<link href="webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
 <link rel="icon" type="image/png" href="resources/images/favicon.ico">
 
 <style type="text/css">
@@ -30,13 +31,12 @@
 <body>
 
 	<jsp:include page="header.jsp" />
-	
+
 	<section class="outer-wrapper">
 		<div class="inner-wrapper">
 			<div class="container">
 				<form name='loginForm' action="<spring:url value='/postLogin' />"
 					method='POST'>
-					<sec:csrfInput />
 					<div class="row">
 						<c:if test="${not empty error}">
 							<div class="col-sm-4 col-sm-offset-4">
@@ -97,8 +97,10 @@
 			</div>
 		</div>
 	</section>
+
 	<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
 	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function() {

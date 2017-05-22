@@ -10,7 +10,7 @@
 	rel="stylesheet" />
 <link href="webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
-<title>Welcome</title>
+<title>Split And Go</title>
 </head>
 <body>
 	<jsp:include page="header.jsp" />

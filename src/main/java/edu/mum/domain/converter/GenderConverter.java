@@ -10,6 +10,9 @@ public class GenderConverter implements AttributeConverter<Gender, Integer> {
 
 	@Override
 	public Integer convertToDatabaseColumn(Gender gender) {
+		if (gender == null)
+			return null;
+
 		switch (gender) {
 		case MALE:
 			return 0;
@@ -22,6 +25,9 @@ public class GenderConverter implements AttributeConverter<Gender, Integer> {
 
 	@Override
 	public Gender convertToEntityAttribute(Integer fromDatabase) {
+		if (fromDatabase == null)
+			return null;
+
 		switch (fromDatabase) {
 		case 0:
 			return Gender.MALE;
