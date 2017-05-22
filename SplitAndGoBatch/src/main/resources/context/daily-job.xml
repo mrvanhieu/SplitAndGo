@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/batch"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<context:property-placeholder
+		ignore-unresolvable="true" />
+
+
+	<beans:bean id="itemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader"
+		scope="step">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sql"
+			value="select id, nickName, email from Member" />
+		<beans:property name="rowMapper">
+			<beans:bean class="edu.mum.batch.mapper.ReportInfoRowMapper" />
+		</beans:property>
+	</beans:bean>
+
+	<job id="dailyJob" >
+		<step id="step1">
+			<tasklet>
+				<chunk reader="itemReader" writer="itemWriter"
+					commit-interval="1" />
+			</tasklet>
+		</step>
+	</job>
+
+	<beans:bean id="itemWriter" class="org.springframework.batch.item.xml.StaxEventItemWriter">
+		<beans:property name="resource" value="file:xml/outputs/report.xml" />
+		<beans:property name="marshaller" ref="userUnmarshaller" />
+		<beans:property name="rootTagName" value="members" />
+	</beans:bean>
+
+	<beans:bean id="userUnmarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller">
+		<beans:property name="aliases">
+			<beans:map>
+				<beans:entry key="report" value="edu.mum.domain.ReportInformation" />
+			</beans:map>
+		</beans:property>
+	</beans:bean>
+</beans:beans>
