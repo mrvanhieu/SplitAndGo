@@ -26,7 +26,7 @@
 					<li><a href="<spring:url value="/members" />"><spring:message
 								code="menu.membermanagement" /></a></li>
 					</security:authorize>
-					<li><a href="<spring:url value="/" />"><spring:message
+					<li><a href="<spring:url value="/payments" />"><spring:message
 								code="menu.payment" /></a></li>
 				</security:authorize>
 			</ul>

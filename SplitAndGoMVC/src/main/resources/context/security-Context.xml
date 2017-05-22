@@ -42,6 +42,12 @@
 			"/doLogout" REPLACES it NOTE: is it JUST a URL naming convention - no mapping 
 			occurs -->
 		<security:csrf disabled="true" />
+
+		<!--Authentication & Authorization-->
+		<security:intercept-url pattern="/members**" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/payment**" access="hasRole('ROLE_USER')" />
+		<security:intercept-url pattern="/admin**" access="hasRole('ROLE_ADMIN')" />
+
 	</security:http>
 
 	<!-- Database security "custom queries are because we have used our own 
