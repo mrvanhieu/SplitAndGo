@@ -15,9 +15,6 @@ import java.util.List;
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
 
-	@Autowired
-	private PaymentRestService paymentRestService;
-
 //	public void save(Payment payment) {
 //		paymentRestService.save(payment);
 //	}
@@ -33,6 +30,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private PaymentDao paymentDao;
 
+	@Autowired
 	private PaymentRestService paymentRestService;
 
 	@Autowired
