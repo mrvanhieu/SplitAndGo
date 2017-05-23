@@ -7,6 +7,10 @@ import edu.mum.domain.Trip;
 public interface TripService {
 
 	public void save(Trip trip);
+	
+	public Trip update(Trip trip);
+	
+	public void delete(Long id);
 
 	public List<Trip> findAll();
 

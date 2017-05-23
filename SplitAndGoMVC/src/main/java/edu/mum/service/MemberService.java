@@ -10,7 +10,7 @@ public interface MemberService {
 
 	public void saveFull(Member member);
 
-	public void update(Member member);
+	public Member update(Member member);
 		
 	public List<Member> findAll();
 

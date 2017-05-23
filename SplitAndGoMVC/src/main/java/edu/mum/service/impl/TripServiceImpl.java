@@ -29,4 +29,14 @@ public class TripServiceImpl implements TripService {
 		return tripDao.findOne(id);
 	}
 
+	@Override
+	public Trip update(Trip trip) {
+		return tripDao.update(trip);
+	}
+
+	@Override
+	public void delete(Long id) {
+		tripDao.delete(id);
+	}
+
 }
