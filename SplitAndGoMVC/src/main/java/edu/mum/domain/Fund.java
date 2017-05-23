@@ -6,6 +6,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
 
+import edu.mum.validation.NullMinNumber;
+
 @Entity
 public class Fund {
 
@@ -15,6 +17,7 @@ public class Fund {
 
 	private Double remainingAmount;
 	
+	@NullMinNumber(value = 0, message = "{nullminnumber}")
 	private Double totalAmount;
 
 	@OneToOne

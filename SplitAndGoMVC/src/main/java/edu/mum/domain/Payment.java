@@ -41,7 +41,7 @@ public class Payment {
 	@OneToMany(mappedBy = "payment", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	List<Item> items = new ArrayList<>();
 
-	@ManyToOne
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	Trip trip;
 	
 	public long getId() {
@@ -82,6 +82,14 @@ public class Payment {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
 	}
 
 }

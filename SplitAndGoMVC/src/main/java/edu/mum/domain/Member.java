@@ -25,7 +25,7 @@ public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(length = 20)
 	@EmptyOrSize(min = 2, max = 20, message = "{size.name.validation}")
@@ -55,11 +55,11 @@ public class Member {
 	@Valid
 	Credential credential;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -126,5 +126,5 @@ public class Member {
 	public void setCredential(Credential credential) {
 		this.credential = credential;
 	}
-
+	
 }

@@ -1,5 +1,6 @@
 package edu.mum.service.impl;
 
+import edu.mum.dao.PaymentDao;
 import edu.mum.domain.Payment;
 import edu.mum.rest.service.PaymentRestService;
 import edu.mum.service.PaymentService;
@@ -13,19 +14,46 @@ import java.util.List;
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
 
+//	@Autowired
+//	private PaymentRestService paymentRestService;
+//
+//	public void save(Payment payment) {
+//		paymentRestService.save(payment);
+//	}
+//
+//	public List<Payment> findAll() {
+//		return (List<Payment>) paymentRestService.findAll();
+//	}
+//
+//	public Payment findOne(Long id) {
+//		return paymentRestService.findOne(id);
+//	}
+	
 	@Autowired
-	private PaymentRestService paymentRestService;
-
+	private PaymentDao paymentDao;
+	
 	public void save(Payment payment) {
-		paymentRestService.save(payment);
+		paymentDao.save(payment);
 	}
 
+	public Payment update(Payment payment) {
+		return paymentDao.update(payment);
+	}
+	
+	public void delete(Long id) {
+		paymentDao.delete(id);
+	}
+	
 	public List<Payment> findAll() {
-		return (List<Payment>) paymentRestService.findAll();
+		return (List<Payment>) paymentDao.findAll();
 	}
 
 	public Payment findOne(Long id) {
-		return paymentRestService.findOne(id);
+		return paymentDao.findOne(id);
+	}
+	
+	public List<Payment> findByTripId(Long tripId) {
+		return paymentDao.findByTripId(tripId);
 	}
 
 }

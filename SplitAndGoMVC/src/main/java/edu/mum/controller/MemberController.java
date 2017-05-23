@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomCollectionEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -86,6 +87,9 @@ public class MemberController {
 					return authority;
 				}
 				if (element instanceof String) {
+					if (StringUtils.isEmpty(element)) {
+						return null;
+					}
 					Authority authority = authorityService.findOne(Long.parseLong((String)element));
 					System.out.println("Looking up authority for id " + element + ": " + authority);
 					return authority;

@@ -31,7 +31,7 @@ public class Credential {
 	@OneToOne(mappedBy = "credential", cascade = CascadeType.PERSIST)
 	private Member member;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "username")
 	private List<Authority> authorities = new ArrayList<Authority>();
 	

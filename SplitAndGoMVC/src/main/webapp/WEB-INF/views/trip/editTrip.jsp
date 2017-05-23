@@ -12,122 +12,94 @@
 
 <link href="../../webjars/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" />
+<link href="../../webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+
 </head>
 <body>
 	<jsp:include page="../header.jsp" />
 
 	<div class="container" style="width: 50%">
-		<spring:url value="/members/editMember/" var="editUrl" />
-		<form:form id="editMemberForm" method="POST" action="${editUrl}" modelAttribute="member"
+		<spring:url value="/trips/editTrip/" var="editUrl" />
+		<form:form id="editTripForm" method="POST" action="${editUrl}" modelAttribute="trip"
 			class="form-horizontal">
 			<div class="form-group">
 				<form:hidden path="id" class="form-control" />
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-4" for="firstName"><spring:message
-						code="member.firstname" /></label>
+				<label class="control-label col-sm-4" for="name"><spring:message
+						code="trip.name" /></label>
 				<div class="col-sm-6">
-					<form:input path="firstName" class="form-control" />
-					<form:errors path="firstName" cssClass="text-danger" />
+					<form:input path="name" class="form-control" />
+					<form:errors path="name" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-4" for="lastName"><spring:message
-						code="member.lastname" /></label>
+				<label class="control-label col-sm-4" for="description"><spring:message
+						code="trip.description" /></label>
 				<div class="col-sm-6">
-					<form:input path="lastName" class="form-control" />
-					<form:errors path="lastName" cssClass="text-danger" />
+					<form:textarea path="description" class="form-control" />
+					<form:errors path="description" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-4" for="nickName"><spring:message
-						code="member.nickname" /></label>
+				<label class="control-label col-sm-4" for="startDate"><spring:message
+						code="trip.startdate" /></label>
 				<div class="col-sm-6">
-					<form:input path="nickName" class="form-control" />
-					<form:errors path="nickName" cssClass="text-danger" />
+					<form:input type="date" path="startDate" class="form-control" />
+					<form:errors path="startDate" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-4" for="gender"><spring:message
-						code="member.gender" /></label>
+				<label class="control-label col-sm-4" for="endDate"><spring:message
+						code="trip.enddate" /></label>
 				<div class="col-sm-6">
-					<form:select path="gender" class="form-control">
-						<form:option value="" selected="true">
-							<spring:message code="member.select" />
+					<form:input type="date" path="endDate" class="form-control" />
+					<form:errors path="endDate" cssClass="text-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-4" for="duration"><spring:message
+						code="trip.duration" /></label>
+				<div class="col-sm-6">
+					<form:input path="duration" class="form-control" />
+					<form:errors path="duration" cssClass="text-danger" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="control-label col-sm-4" for="members"><spring:message
+						code="trip.members" /></label>
+				<div class="col-sm-6">
+					<form:select path="members" class="form-control" multiple="true">
+						<form:option value="0">
+							<spring:message code="trip.select" />
 						</form:option>
-						<form:option value="MALE">
-							<spring:message code="member.gender.select.male" />
-						</form:option>
-						<form:option value="FEMALE">
-							<spring:message code="member.gender.select.female" />
-						</form:option>
+						<c:forEach items="${members}" var="member">
+							<c:forEach items="${trip.members}" var="tripMember">
+								<c:if test="${tripMember.id == member.id}">
+									<c:set var="selected" value="true"></c:set>
+								</c:if>
+							</c:forEach>
+							<c:if test="${selected eq 'true'}">
+								<form:option value="${member.id}" selected="selected">
+									${member.firstName}&nbsp${member.lastName}
+								</form:option>							
+							</c:if>
+							<c:if test="${selected ne 'true'}">
+								<form:option value="${member.id}">
+									${member.firstName}&nbsp${member.lastName}
+								</form:option>		
+							</c:if>
+							<c:set var="selected" value="false"></c:set>
+						</c:forEach>
 					</form:select>
-					<form:errors path="gender" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label class="control-label col-sm-4" for="birthDate"><spring:message
-						code="member.birthdate" /></label>
+				<label class="control-label col-sm-4" for="fund.totalAmount"><spring:message
+						code="trip.fund.totalamount" /></label>
 				<div class="col-sm-6">
-					<form:input type="date" path="birthDate" class="form-control" />
-					<form:errors path="birthDate" cssClass="text-danger" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="email"><spring:message
-						code="member.email" /></label>
-				<div class="col-sm-6">
-					<form:input path="email" class="form-control" />
-					<form:errors path="email" cssClass="text-danger" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="phone"><spring:message
-						code="member.phone" /></label>
-				<div class="col-sm-6">
-					<form:input path="phone" class="form-control" />
-					<form:errors path="phone" cssClass="text-danger" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="credential.username"><spring:message
-						code="member.credential.username" /></label>
-				<div class="col-sm-6">
-					<form:input path="credential.username" class="form-control" />
-					<form:errors path="credential.username" cssClass="text-danger" />
-				</div>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="credential.password"><spring:message
-						code="member.credential.password" /></label>
-				<div class="col-sm-6">
-					<form:password path="credential.password" showPassword="true" class="form-control" />
-					<form:errors path="credential.password" cssClass="text-danger" />
-				</div>
-			</div>-->
-			<!-- used for keep track the current authorities, the authority list would be null without this -->
-			<div class="form-group hidden">
-				<form:select path="credential.authorities" multiple="true">
-					<c:forEach items="${member.credential.authorities}" var="authority">
-						<form:option value="${authority.id}" selected="selected">${authority.authority}</form:option>
-					</c:forEach>
-				</form:select>
-			</div>
-			<div class="form-group">
-				<label class="control-label col-sm-4" for="credential.authorityList"><spring:message
-						code="member.authority" /></label>
-				<div class="col-sm-6">
-					<form:select path="credential.authorityList" class="form-control" multiple="true">
-						<form:option value="">
-							<spring:message code="member.authority.select" />
-						</form:option>
-						<form:option value="ROLE_ADMIN">
-							<spring:message code="member.authority.select.admin" />
-						</form:option>
-						<form:option value="ROLE_USER">
-							<spring:message code="member.authority.select.user" />
-						</form:option>
-					</form:select>
+					<form:input path="fund.totalAmount" class="form-control" />
+					<form:errors path="fund.totalAmount" cssClass="text-danger" />
 				</div>
 			</div>
 			<div class="form-group">
@@ -139,5 +111,15 @@
 
 		</form:form>
 	</div>
+	
+	<script src="../../webjars/jquery/3.1.1/jquery.min.js"></script>
+	<script src="../../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="../../webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+	
+	<script type="text/javascript">
+		$(document).ready(function() {
+			$("#name").focus();
+		});
+	</script>
 </body>
 </html>

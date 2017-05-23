@@ -14,19 +14,21 @@
 		<div class="collapse navbar-collapse">
 			<ul class="nav navbar-nav">
 				<security:authorize access="isAuthenticated()">
-					<li class="dropdown"><a href="#" class="dropdown-toggle"
+					<!-- <li class="dropdown"><a href="<spring:url value="/trips" />" class="dropdown-toggle"
 						data-toggle="dropdown" role="button" aria-haspopup="true"
 						aria-expanded="false"><spring:message code="menu.trip" /> <span
 							class="caret"></span></a>
 						<ul class="dropdown-menu">
 							<li><a href="#"><spring:message code="menu.trip.members" /></a></li>
 							<li><a href="#"><spring:message code="menu.trip.fund" /></a></li>
-						</ul></li>
+						</ul> --></li>
+					<li><a href="<spring:url value="/trips" />"><spring:message
+								code="menu.trip" /></a></li>
 					<security:authorize access="hasRole('ROLE_ADMIN')">
 					<li><a href="<spring:url value="/members" />"><spring:message
 								code="menu.membermanagement" /></a></li>
 					</security:authorize>
-					<li><a href="<spring:url value="/payments" />"><spring:message
+					<li><a href="<spring:url value="/payments/trips" />"><spring:message
 								code="menu.payment" /></a></li>
 				</security:authorize>
 			</ul>

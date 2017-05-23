@@ -33,6 +33,7 @@
 					<th><spring:message code="trip.name" /></th>
 					<th><spring:message code="trip.startdate" /></th>
 					<th><spring:message code="trip.enddate" /></th>
+					<th><spring:message code="trip.fund.totalamount" /></th>
 				</tr>
 			</thead>
 			<tbody>
@@ -42,10 +43,11 @@
 						<td>${trip.name}</td>
 						<td>${trip.startDate}</td>
 						<td>${trip.endDate}</td>
+						<td>${trip.fund.totalAmount}
 						<td><a
 							href="<spring:url value='/trips/editTrip/${trip.id}'/>"><span
 								class="glyphicon glyphicon-pencil"></span> </a>| <a
-							href='javascript:deletetrip(${trip.id})'><span
+							href='javascript:deleteTrip(${trip.id})'><span
 								class="glyphicon glyphicon-trash"></span></a></td>
 					</tr>
 				</c:forEach>
@@ -84,7 +86,7 @@
 			});
 		});
 		
-		var deletetrip = function(id) {
+		var deleteTrip = function(id) {
 			$("#tripId").val(id);
 			$("#confirmDeleteTripDialog").dialog("open");
 		}
