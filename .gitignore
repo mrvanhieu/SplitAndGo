@@ -5,3 +5,6 @@ SplitAndGoBatch2/.classpath
 SplitAndGoBatch2/.settings/org.eclipse.jdt.core.prefs
 *.prefs
 SplitAndGoBatch2/.project
+SplitAndGoBatch2/src/main/java/edu/.DS_Store
+SplitAndGoBatch2/src/main/java/edu/mum/.DS_Store
+SplitAndGoBatch2/src/main/java/edu/mum/batch/controller/.DS_Store
