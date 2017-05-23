@@ -39,7 +39,7 @@ public class EmailService {
 
 	private static final String JPG_MIME = "image/jpg";
 
-	@Autowired
+	//@Autowired
 	private JavaMailSender mailSender;
 
 	@ServiceActivator()
