@@ -3,6 +3,7 @@ package edu.mum.service.impl;
 import edu.mum.dao.PaymentDao;
 import edu.mum.domain.Payment;
 import edu.mum.rest.service.PaymentRestService;
+import edu.mum.rest.service.ReportRestService;
 import edu.mum.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,10 +29,15 @@ public class PaymentServiceImpl implements PaymentService {
 //	public Payment findOne(Long id) {
 //		return paymentRestService.findOne(id);
 //	}
-	
+
 	@Autowired
 	private PaymentDao paymentDao;
-	
+
+	private PaymentRestService paymentRestService;
+
+	@Autowired
+	private ReportRestService reportRestService;
+
 	public void save(Payment payment) {
 		paymentDao.save(payment);
 	}
@@ -39,11 +45,11 @@ public class PaymentServiceImpl implements PaymentService {
 	public Payment update(Payment payment) {
 		return paymentDao.update(payment);
 	}
-	
+
 	public void delete(Long id) {
 		paymentDao.delete(id);
 	}
-	
+
 	public List<Payment> findAll() {
 		return (List<Payment>) paymentDao.findAll();
 	}
@@ -51,7 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
 	public Payment findOne(Long id) {
 		return paymentDao.findOne(id);
 	}
-	
+
 	public List<Payment> findByTripId(Long tripId) {
 		return paymentDao.findByTripId(tripId);
 	}
