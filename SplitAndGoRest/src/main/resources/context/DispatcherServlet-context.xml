@@ -29,6 +29,8 @@
 
 	<mvc:resources location="/resources/" mapping="/resources/**" />
 
+	<bean id="springSecurityFilterChain" class="org.springframework.web.filter.DelegatingFilterProxy"/>
+
 	<bean id="messageSource"
 		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
 		<property name="basenames" value="classpath:messages,classpath:errorMessages" />

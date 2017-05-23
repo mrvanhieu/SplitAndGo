@@ -21,11 +21,11 @@ public class PaymentRestServiceImpl implements PaymentRestService {
 
 	@Autowired
 	RestHttpHeader remoteApi;
-	String host = "http://localhost:9099/SplitAndGoRest/";
+	String host = "http://localhost:9099/SplitAndGoRest/rest";
 
 	public List<Payment> findAll() {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		return Arrays.asList(restTemplate.exchange(host + "payments/", HttpMethod.GET, remoteApi.getHttpEntity(), Payment[].class).getBody());
+		return Arrays.asList(restTemplate.exchange(host + "/payments/", HttpMethod.GET, remoteApi.getHttpEntity(), Payment[].class).getBody());
 	}
 
 	public void save(Payment payment) {

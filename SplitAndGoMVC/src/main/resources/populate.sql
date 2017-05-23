@@ -7,3 +7,6 @@ INSERT INTO authority (username, authority) VALUES ('admin', 'ROLE_USER');
 
 INSERT INTO `MEMBER` (firstname, lastname, nickname, email, gender, credential_id) VALUES ('Tuyen', 'Lam', 'Tien' ,'tuyenrg@gmail.com', 0 ,'admin');
 INSERT INTO `MEMBER` (firstname, lastname, nickname, email, gender, credential_id) VALUES ('Guest', 'Guest', 'Guest' ,'guest@gmail.com', 0, 'guest');
+
+INSERT INTO Payment (`id`, `amount`, `date`, `description`) VALUES ('2', '100', '2017-10-10', 'Second payment');
+INSERT INTO Payment (`id`, `amount`, `date`, `description`) VALUES ('1', '200', '2017-09-09', 'First payment')
