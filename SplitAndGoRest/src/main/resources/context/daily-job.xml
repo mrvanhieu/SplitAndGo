@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/batch"
+	xmlns:beans="http://www.springframework.org/schema/beans" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+            http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch.xsd
+            http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+            http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task-3.2.xsd
+    ">
+
+	<context:property-placeholder
+		ignore-unresolvable="true" />
+
+
+	<beans:bean id="itemReader"
+		class="org.springframework.batch.item.database.JdbcCursorItemReader"
+		scope="step">
+		<beans:property name="dataSource" ref="dataSource" />
+		<beans:property name="sql"
+			value="select id, amount, date, description, trip_id from Payment WHERE date >= #{jobParameters['date']}" />
+		<beans:property name="rowMapper">
+			<beans:bean class="edu.mum.batch.mapper.ReportInfoRowMapper" />
+		</beans:property>
+	</beans:bean>
+
+	<job id="dailyJob">
+		<step id="step1">
+			<tasklet>
+				<chunk reader="itemReader" processor="reportProcessor" writer="customWriter"
+					commit-interval="1" />
+			</tasklet>
+		</step>
+	</job>
+	
+	<!-- 
+	<listeners>
+			<listener ref="notificationExecutionsListener" />
+		</listeners>
+		 -->
+
+	<beans:bean id="reportProcessor" class="edu.mum.batch.process.ReportInforProcess">
+		<beans:property name="location" value="${output}" />
+	</beans:bean>
+
+	<beans:bean id="customWriter" class="edu.mum.batch.CustomItemWriter" />
+
+	<beans:bean id="batchScheduler" class="edu.mum.batch.BatchScheduler" />
+
+
+
+	<beans:bean
+		class="org.springframework.batch.core.configuration.support.JobRegistryBeanPostProcessor">
+		<beans:property name="jobRegistry" ref="jobRegistry" />
+	</beans:bean>
+
+	<beans:bean id="jobRegistry"
+		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
+	<!-- run every 10 seconds -->
+
+	<beans:bean
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<beans:property name="triggers">
+			<beans:bean id="cronTrigger"
+				class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+				<beans:property name="jobDetail" ref="jobDetail" />
+				<beans:property name="cronExpression" value="${cronExpression}" />
+			</beans:bean>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="jobDetail"
+		class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+		<beans:property name="jobClass" value="edu.mum.batch.BatchScheduler"></beans:property>
+		<beans:property name="jobDataAsMap">
+			<beans:map>
+				<beans:entry key="jobName" value="dailyJob"></beans:entry>
+				<beans:entry key="jobLauncher" value-ref="jobLauncher"></beans:entry>
+				<beans:entry key="jobLocator" value-ref="jobRegistry"></beans:entry>
+			</beans:map>
+		</beans:property>
+
+	</beans:bean>
+
+	<!--<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />-->
+
+</beans:beans>
