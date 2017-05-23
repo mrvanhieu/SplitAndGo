@@ -34,12 +34,6 @@
 		</step>
 	</job>
 	
-	<!-- 
-	<listeners>
-			<listener ref="notificationExecutionsListener" />
-		</listeners>
-		 -->
-
 	<beans:bean id="reportProcessor" class="edu.mum.batch.process.ReportInforProcess">
 		<beans:property name="location" value="${output}" />
 	</beans:bean>

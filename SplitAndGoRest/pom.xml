@@ -8,11 +8,6 @@
 		<dependencies>
 
 			<dependency>
-				<groupId>edu.mum</groupId>
-				<artifactId>batch</artifactId>
-				<version>1.0</version>
-			</dependency>
-			<dependency>
 				<groupId>org.springframework</groupId>
 				<artifactId>spring-framework-bom</artifactId>
 				<version>4.2.4.RELEASE</version>
@@ -88,25 +83,25 @@
 			<artifactId>spring-orm</artifactId>
 		</dependency>
 
-	<!--Temporary comment Spring security to apply Jersy-->
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-web</artifactId>
-                </dependency>
+		<!--Temporary comment Spring security to apply Jersy -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
 
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-config</artifactId>
-                </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
 
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-taglibs</artifactId>
-                </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -143,12 +138,9 @@
 		</dependency>
 
 		<!-- jquery-ui -->
-		<!-- <dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery-ui</artifactId>
-			<version>1.12.1</version>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>org.webjars</groupId> <artifactId>jquery-ui</artifactId> 
+			<version>1.12.1</version> </dependency> -->
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -165,8 +157,6 @@
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate4</artifactId>
 		</dependency>
-
-
 
 		<dependency>
 			<groupId>org.glassfish.jersey.ext</groupId>
@@ -187,19 +177,21 @@
 		<dependency>
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-core</artifactId>
-			<version>${spring.batch.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.batch</groupId>
 			<artifactId>spring-batch-infrastructure</artifactId>
-			<version>${spring.batch.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
-			<version>2.2.1</version>
 		</dependency>
 
+		<dependency>
+			<groupId>edu.mum</groupId>
+			<artifactId>batch</artifactId>
+			<version>1.0</version>
+		</dependency>
 		<!-- IF building Jar...OTHERwise we are just reference Domain in Eclipse 
 			<dependency> <groupId>edu.mum</groupId> <artifactId>SecurityExampleDomain</artifactId> 
 			<version>1.0.0</version> </dependency> -->
