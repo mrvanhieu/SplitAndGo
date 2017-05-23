@@ -25,18 +25,13 @@
 		</beans:property>
 	</beans:bean>
 
-	
-	<job id="dailyJob" >
-		
+	<job id="dailyJob">
 		<step id="step1">
 			<tasklet>
 				<chunk reader="itemReader" processor="reportProcessor" writer="customWriter"
 					commit-interval="1" />
 			</tasklet>
 		</step>
-<!--		<listeners>
-			<listener ref="notificationExecutionsListener" />
-		</listeners>-->
 	</job>
 	
 	<!-- 
@@ -88,6 +83,6 @@
 
 	</beans:bean>
 
-	<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />
+	<!--<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />-->
 
 </beans:beans>

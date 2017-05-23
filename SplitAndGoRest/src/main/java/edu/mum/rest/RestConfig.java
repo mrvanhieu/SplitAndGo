@@ -1,6 +1,8 @@
 package edu.mum.rest;
 
+import edu.mum.rest.service.JobRestService;
 import edu.mum.rest.service.PaymentRestService;
+import edu.mum.rest.service.ReportRestService;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
 
@@ -15,6 +17,8 @@ import org.glassfish.jersey.server.spring.scope.RequestContextFilter;
  		    register(RequestContextFilter.class);   
  		    // Register Product provider -  REST endpoints...
  		    register(PaymentRestService.class);
+ 		    register(ReportRestService.class);
+ 		    register(JobRestService.class);
 		}
 	}
 
