@@ -14,7 +14,7 @@ public class Main {
 
 	private void run() {
 
-		String[] springConfig = { "context/application-context.xml","context/integration-context.xml","context/mail-context.xml", "context/daily-job.xml" };
+		String[] springConfig = { "context/application-context.xml", "context/daily-job.xml" };
 
 		ApplicationContext context = new ClassPathXmlApplicationContext(springConfig);
 

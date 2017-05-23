@@ -32,9 +32,9 @@
 					commit-interval="1" />
 			</tasklet>
 		</step>
-		<listeners>
+<!--		<listeners>
 			<listener ref="notificationExecutionsListener" />
-		</listeners>
+		</listeners>-->
 	</job>
 	
 	<!-- 
@@ -88,10 +88,4 @@
 
 	<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />
 
-	<!-- <beans:bean id="itemWriter" class="org.springframework.batch.item.xml.StaxEventItemWriter"> 
-		<beans:property name="resource" value="file:xml/outputs/report.xml" /> <beans:property 
-		name="marshaller" ref="userUnmarshaller" /> <beans:property name="rootTagName" 
-		value="members" /> </beans:bean> <beans:bean id="userUnmarshaller" class="org.springframework.oxm.xstream.XStreamMarshaller"> 
-		<beans:property name="aliases"> <beans:map> <beans:entry key="report" value="edu.mum.domain.ReportInformation" 
-		/> </beans:map> </beans:property> </beans:bean> -->
 </beans:beans>
