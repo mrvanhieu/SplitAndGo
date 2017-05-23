@@ -1,2 +1,7 @@
 *target
 *.idea
+SplitAndGoBatch2/.DS_Store
+SplitAndGoBatch2/.classpath
+SplitAndGoBatch2/.settings/org.eclipse.jdt.core.prefs
+*.prefs
+SplitAndGoBatch2/.project
