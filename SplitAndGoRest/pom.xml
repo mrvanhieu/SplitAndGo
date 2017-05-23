@@ -31,7 +31,13 @@
 				<scope>import</scope>
 			</dependency>
 
-
+			<dependency>
+				<groupId>org.glassfish.jersey</groupId>
+				<artifactId>jersey-bom</artifactId>
+				<version>2.25.1</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -77,25 +83,25 @@
 			<artifactId>spring-orm</artifactId>
 		</dependency>
 
-	<!--Temporary comment Spring security to apply Jersy-->
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-web</artifactId>
-                </dependency>
+		<!--Temporary comment Spring security to apply Jersy -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+		</dependency>
 
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-config</artifactId>
-                </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+		</dependency>
 
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-core</artifactId>
-                </dependency>
-                <dependency>
-                    <groupId>org.springframework.security</groupId>
-                    <artifactId>spring-security-taglibs</artifactId>
-                </dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+		</dependency>
 
 		<dependency>
 			<groupId>org.hibernate</groupId>
@@ -132,12 +138,9 @@
 		</dependency>
 
 		<!-- jquery-ui -->
-		<!-- <dependency>
-			<groupId>org.webjars</groupId>
-			<artifactId>jquery-ui</artifactId>
-			<version>1.12.1</version>
-		</dependency> -->
-		
+		<!-- <dependency> <groupId>org.webjars</groupId> <artifactId>jquery-ui</artifactId> 
+			<version>1.12.1</version> </dependency> -->
+
 		<dependency>
 			<groupId>log4j</groupId>
 			<artifactId>log4j</artifactId>
@@ -153,11 +156,6 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.datatype</groupId>
 			<artifactId>jackson-datatype-hibernate4</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.glassfish.jersey</groupId>
-			<artifactId>jersey-bom</artifactId>
 		</dependency>
 
 		<dependency>

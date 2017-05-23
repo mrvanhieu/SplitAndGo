@@ -66,8 +66,6 @@ public class PaymentController {
 		if(result.hasErrors()) {
 			return "payment/addPayment";
 		}
-		Trip trip = tripService.findOne(paymentToBeAdded.getTrip().getId());
-		paymentToBeAdded.setTrip(trip);
 		paymentService.update(paymentToBeAdded);
 		
 		return "payment/payments";

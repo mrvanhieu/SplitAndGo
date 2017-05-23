@@ -19,6 +19,10 @@ public class PaymentServiceImpl implements PaymentService {
 	public void save(Payment payment) {
 		paymentDao.save(payment);
 	}
+	
+	public Payment update(Payment payment) {
+		return paymentDao.update(payment);
+	}
 
 	public List<Payment> findAll() {
 		return (List<Payment>) paymentDao.findAll();

@@ -15,9 +15,9 @@ import java.util.List;
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
 
-//	@Autowired
-//	private PaymentRestService paymentRestService;
-//
+	@Autowired
+	private PaymentRestService paymentRestService;
+
 //	public void save(Payment payment) {
 //		paymentRestService.save(payment);
 //	}
@@ -39,11 +39,11 @@ public class PaymentServiceImpl implements PaymentService {
 	private ReportRestService reportRestService;
 
 	public void save(Payment payment) {
-		paymentDao.save(payment);
+		paymentRestService.save(payment);
 	}
 
 	public Payment update(Payment payment) {
-		return paymentDao.update(payment);
+		return paymentRestService.update(payment);
 	}
 
 	public void delete(Long id) {
@@ -51,11 +51,11 @@ public class PaymentServiceImpl implements PaymentService {
 	}
 
 	public List<Payment> findAll() {
-		return (List<Payment>) paymentDao.findAll();
+		return (List<Payment>) paymentRestService.findAll();
 	}
 
 	public Payment findOne(Long id) {
-		return paymentDao.findOne(id);
+		return paymentRestService.findOne(id);
 	}
 
 	public List<Payment> findByTripId(Long tripId) {

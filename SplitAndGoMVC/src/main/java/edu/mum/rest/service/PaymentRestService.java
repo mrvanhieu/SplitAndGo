@@ -7,6 +7,8 @@ import java.util.List;
 public interface PaymentRestService {
 
 	public void save(Payment payment);
+	
+	public Payment update(Payment payment);
 
 	public List<Payment> findAll();
 
