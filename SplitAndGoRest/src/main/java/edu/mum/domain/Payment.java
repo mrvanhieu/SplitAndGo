@@ -4,7 +4,16 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -25,12 +34,16 @@ public class Payment {
 	@NotNull(message = "{notnull}")
 	private Double amount;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date date;
 
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "payment", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(mappedBy = "payment", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
 	List<Item> items = new ArrayList<>();
 
+	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	Trip trip;
+	
 	public long getId() {
 		return id;
 	}
@@ -69,6 +82,14 @@ public class Payment {
 
 	public void setItems(List<Item> items) {
 		this.items = items;
+	}
+
+	public Trip getTrip() {
+		return trip;
+	}
+
+	public void setTrip(Trip trip) {
+		this.trip = trip;
 	}
 
 }

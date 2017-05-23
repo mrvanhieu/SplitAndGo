@@ -7,6 +7,8 @@ import edu.mum.domain.Payment;
 public interface PaymentService {
 
 	public void save(Payment payment);
+	
+	public Payment update(Payment payment);
 
 	public List<Payment> findAll();
 
