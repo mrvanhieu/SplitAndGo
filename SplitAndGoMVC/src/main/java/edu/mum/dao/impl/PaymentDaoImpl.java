@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.persistence.Query;
 
+import edu.mum.domain.Member;
 import org.springframework.stereotype.Repository;
 
 import edu.mum.dao.PaymentDao;
@@ -23,4 +24,9 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Payment> findPaymentsForReport(){
+		Query query = entityManager.createQuery("SELECT  distinct trip.id as trip, date as date from Payment");
+		return (List<Payment>) query.getResultList();
+	}
 }

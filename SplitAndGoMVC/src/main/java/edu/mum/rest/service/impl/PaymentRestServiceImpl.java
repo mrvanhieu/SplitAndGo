@@ -17,12 +17,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @Component
-public class PaymentRestServiceImpl implements PaymentRestService {
-
-	@Autowired
-	RestHttpHeader remoteApi;
-	String host = "http://localhost:9099/SplitAndGoRest/rest";
-
+public class PaymentRestServiceImpl extends GenericRestServiceImpl implements PaymentRestService {
 	public List<Payment> findAll() {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		return Arrays.asList(restTemplate.exchange(host + "/payments/", HttpMethod.GET, remoteApi.getHttpEntity(), Payment[].class).getBody());
@@ -38,4 +33,5 @@ public class PaymentRestServiceImpl implements PaymentRestService {
 		Payment payment =  (restTemplate.exchange(host + "/payments/"+ id, HttpMethod.GET, remoteApi.getHttpEntity(), Payment.class).getBody());
 		return payment;
 	}
+
 }

@@ -30,6 +30,9 @@
 					</security:authorize>
 					<li><a href="<spring:url value="/payments/trips" />"><spring:message
 								code="menu.payment" /></a></li>
+
+					<li><a href="<spring:url value="/paymentReports" />"><spring:message
+							code="menu.reports" /></a></li>
 				</security:authorize>
 			</ul>
 			<ul class="nav navbar-nav navbar-right">
