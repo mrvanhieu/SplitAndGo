@@ -4,6 +4,7 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jpa="http://www.springframework.org/schema/data/jpa"
 	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:rabbit="http://www.springframework.org/schema/rabbit"
 	xsi:schemaLocation="
       http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
@@ -11,6 +12,7 @@
       http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
       http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
       http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+      http://www.springframework.org/schema/rabbit   http://www.springframework.org/schema/rabbit/spring-rabbit.xsd
       ">
 
 	<context:property-placeholder location="classpath:application.properties" />
@@ -57,6 +59,11 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-	<import resource="notification-context.xml"/>
+	<context:property-placeholder location="classpath:application.properties" />
+	 <!-- AMPQ Connection -->
+	<rabbit:connection-factory id="connectionFactory"
+		host="localhost" username="${amqp.user}" password="${amqp.passwords}" />
+	<rabbit:admin connection-factory="connectionFactory" />
+	<import resource="notification-context.xml" />
 
 </beans>
