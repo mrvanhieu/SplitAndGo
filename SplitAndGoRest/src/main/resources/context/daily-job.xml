@@ -33,12 +33,14 @@
 			</tasklet>
 		</step>
 	</job>
-	
+
 	<beans:bean id="reportProcessor" class="edu.mum.batch.process.ReportInforProcess">
 		<beans:property name="location" value="${output}" />
 	</beans:bean>
 
-	<beans:bean id="customWriter" class="edu.mum.batch.CustomItemWriter" />
+	<beans:bean id="customWriter" class="edu.mum.batch.CustomItemWriter">
+		<beans:property name="location" value="${output}" />
+	</beans:bean>
 
 	<beans:bean id="batchScheduler" class="edu.mum.batch.BatchScheduler" />
 
@@ -77,6 +79,7 @@
 
 	</beans:bean>
 
-	<!--<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />-->
+	<!--<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" 
+		/> -->
 
 </beans:beans>
