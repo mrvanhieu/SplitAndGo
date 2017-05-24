@@ -1,5 +1,7 @@
 package edu.mum.dao.impl;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Query;
@@ -25,8 +27,22 @@ public class PaymentDaoImpl extends GenericDaoImpl<Payment> implements PaymentDa
 	}
 
 	@Override
-	public List<Payment> findPaymentsForReport(){
-		Query query = entityManager.createQuery("SELECT  distinct trip.id as trip, date as date from Payment");
-		return (List<Payment>) query.getResultList();
+	public List<Payment> findPaymentsForReport(Long tripId){
+		Query query = entityManager.createQuery("SELECT  distinct trip.id as trip, date as date from Payment where trip.id="+tripId);
+
+
+		List<Payment> paymentList = new ArrayList<>();
+		List<Object[]> queryResultList =query.getResultList();;
+
+		for(Object[] item: queryResultList){
+			Long id = (Long)item[0];
+			Date date = (java.util.Date)item[1];
+			Payment payment = new Payment();
+			payment.setId(id);
+			payment.setDate(date);
+			paymentList.add(payment);
+		}
+
+		return paymentList;
 	}
 }

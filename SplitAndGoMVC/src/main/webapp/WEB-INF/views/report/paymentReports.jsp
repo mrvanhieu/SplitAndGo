@@ -18,13 +18,32 @@
 <body>
 	<jsp:include page="../header.jsp" />
 
-	<div class="container">
+	<div class="container" style="width=70%">
 		<div class="row">
-			<a href="<spring:url value='/payments/addMember/'/>" class="btn btn-default btn-sm">
-				<span class="glyphicon glyphicon-plus-sign"></span>
-				<spring:message code="member.button.addmember" />
-			</a>
+			<div class="form-group">
+				<div class="col-sm-2" style="padding-left:0px">
+					<select class="form-control" id="tripId">
+						<option value="0"><spring:message code="payment.select" /></option>
+						<c:forEach items="${trips}" var="trip">
+							<option value="${trip.id}">${trip.name}</option>
+						</c:forEach>
+					</select>
+				</div>
+			</div>
 		</div>
+		<br/>
+		<div class="row">
+			<div class="panel panel-default">
+				<div class="panel-heading"><spring:message code="report.header" /></div>
+				<div  id="paymentReportsDetail" class="container">
+
+				</div>
+			</div>
+		</div>
+	</div>
+<%--
+	<div class="container">
+
 		<br />
 		<table class="table table-hover">
 			<thead>
@@ -45,46 +64,45 @@
 								class="glyphicon glyphicon-pencil"></span> </a></td>
 					</tr>
 				</c:forEach>
+				<tr>
+					<td><a name="View Sample Report"
+						   href="<spring:url value='/paymentReports/1/2017-05-23'/>">View Sample Report </a></td>
+				</tr>
 			</tbody>
 		</table>
-	</div>
-
-	<div id="confirmDeleteMemberDialog">
-		<spring:message code="member.modal.confirmdelete.content" />
-		<input type="hidden" id="memberId">
-	</div>
+	</div>--%>
 
 	<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
 	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
-	
+
 	<script>
 		$(document).ready(function() {
 			$(function() {
-				$("#confirmDeleteMemberDialog").dialog({
-					title : "<spring:message code='member.modal.confirmdelete.title' />",
-					autoOpen : false,
-					height : "auto",
-					width : "auto",
-					modal: true,
-			     	buttons: {
-			        	Yes: function() {
-			        		$(this).dialog("close");
-			        		window.location.href = "members/deleteMember/" + $("#memberId").val();
-				        },
-				        Cancel: function() {
-				        	$(this).dialog("close");
-				        }
-			      }
+				$('#tripId').change(function() {
+					var selectedTripId = $('#tripId option:selected').val();
+					if (selectedTripId == 0) {
+						return;
+					}
+					loadPayments();
 				});
 			});
 		});
-		
-		var deleteMember = function(id) {
-			$("#memberId").val(id);
-			$("#confirmDeleteMemberDialog").dialog("open");
+
+		var loadPayments = function() {
+			var selectedTripId = $('#tripId option:selected').val();
+			$.ajax({
+				type : 'GET',
+				url : "<spring:url value='/paymentReports/'/>" + selectedTripId,
+				success : function(data) {
+					$('#paymentReportsDetail').html(data);
+				},
+				error : function(e) {
+					alert(e.responseJSON["message"]);
+				}
+			});
 		}
+
 	</script>
-	
 </body>
 </html>

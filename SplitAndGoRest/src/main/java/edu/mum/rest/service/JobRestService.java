@@ -22,14 +22,15 @@ public class JobRestService {
 
 	@Autowired
 	JobLauncher jobLauncher;
-
-	@Autowired
-	Job dailyJob;
+//
+//	@Autowired
+//	Job dailyJob;
 
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
 	public String handle() throws Exception {
+		System.out.println("============== Launch Job");
 //
 ////        Logger logger = LoggerFactory.getLogger(this.getClass());
 //		try {

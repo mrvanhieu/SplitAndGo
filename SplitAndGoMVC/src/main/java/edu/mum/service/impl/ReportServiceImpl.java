@@ -2,9 +2,7 @@ package edu.mum.service.impl;
 
 import edu.mum.dao.PaymentDao;
 import edu.mum.domain.Payment;
-import edu.mum.rest.service.PaymentRestService;
 import edu.mum.rest.service.ReportRestService;
-import edu.mum.service.PaymentService;
 import edu.mum.service.ReportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,13 +21,14 @@ public class ReportServiceImpl implements ReportService {
 	private PaymentDao paymentDao;
 
 	@Override
-	public List<Payment> findPaymentsForReport() {
-		return paymentDao.findPaymentsForReport();
+	public List<Payment> findPaymentsForReport(Long id) {
+		return paymentDao.findPaymentsForReport(id);
 	}
 
 	@Override
-	public List<Payment> findPaymentsForReport(String date) {
-		return reportRestService.findPaymentsForReport(date);
+	public byte[] findPaymentsForReport(Long id, String date) {
+		byte[] response =reportRestService.findPaymentsForReport(id, date);;
+		return response;
 	}
 
 
