@@ -8,8 +8,6 @@ public interface MemberService {
 
 	public void save(Member member);
 
-	public void saveFull(Member member);
-
 	public Member update(Member member);
 		
 	public List<Member> findAll();

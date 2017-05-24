@@ -4,10 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
 
+import edu.mum.annotation.Logging;
 import edu.mum.dao.MemberDao;
 import edu.mum.domain.Authority;
 import edu.mum.domain.Member;
@@ -24,17 +26,15 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	CredentialService credentialsService;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void save(Member member) {
 		updateAuthorities(member.getCredential().getAuthorityList(), member.getCredential().getAuthorities());
 		memberDao.save(member);
 	}
 
-	@Override
-	public void saveFull(Member member) {
-		credentialsService.save(member.getCredential());
-		memberDao.save(member);
-	}
-
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public Member update(Member member) {
 		updateAuthorities(member.getCredential().getAuthorityList(), member.getCredential().getAuthorities());
 		return memberDao.update(member);
@@ -73,6 +73,8 @@ public class MemberServiceImpl implements MemberService {
 		member.getCredential().setAuthorityList(authorityList);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void delete(Long id) {
 		memberDao.delete(id);
 	}

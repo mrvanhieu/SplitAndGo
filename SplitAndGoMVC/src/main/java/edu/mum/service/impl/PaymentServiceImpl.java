@@ -3,9 +3,11 @@ package edu.mum.service.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import edu.mum.annotation.Logging;
 import edu.mum.domain.Payment;
 import edu.mum.domain.dto.PaymentDto;
 import edu.mum.rest.service.PaymentRestService;
@@ -22,14 +24,20 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private ReportRestService reportRestService;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void save(Payment payment) {
 		paymentRestService.save(payment);
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public PaymentDto update(PaymentDto payment) {
 		return paymentRestService.update(payment);
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void delete(Long id) {
 		paymentRestService.delete(id);
 	}
