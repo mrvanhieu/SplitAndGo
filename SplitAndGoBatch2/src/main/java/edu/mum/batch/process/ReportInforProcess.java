@@ -24,66 +24,66 @@ public class ReportInforProcess implements ItemProcessor<TripPayment, TripPaymen
 		// check if folder name is base on trip_id if also exist, then add new
 		// report file
 		// Report format Payment_YYMMDD
-		String path = location + "/" + tripPayment.getTripId();
-
-		Path folder = Paths.get(path);
-        //if directory exists?
-        if (!Files.exists(folder)) {
-            try {
-                Files.createDirectories(folder);
-            } catch (IOException e) {
-                //fail to create directory
-                e.printStackTrace();
-            }
-        }
-
-		LocalDate date1 = LocalDate.now();
-		System.out.println("Current date: " + date1);
-
-		// Write content
-		BufferedWriter bw = null;
-		FileWriter fw = null;
-
-		try {
-
-			String fileName = "Payment_" + date1.toString() + ".txt";
-			String content = generatContentFile(tripPayment);
-
-			File reportFile = new File(path + "/" + fileName);
-
-			if (!reportFile.exists()) {
-				reportFile.createNewFile();
-				// true = append file
-			}
-
-			fw = new FileWriter(reportFile.getAbsoluteFile(), true);
-			bw = new BufferedWriter(fw);
-
-			bw.write(content);
-
-			System.out.println(content);
-			
-		} catch (IOException e) {
-
-			e.printStackTrace();
-
-		} finally {
-
-			try {
-
-				if (bw != null)
-					bw.close();
-
-				if (fw != null)
-					fw.close();
-
-			} catch (IOException ex) {
-
-				ex.printStackTrace();
-
-			}
-		}
-
+//		String path = location + "/" + tripPayment.getTripId();
+//
+//		Path folder = Paths.get(path);
+//        //if directory exists?
+//        if (!Files.exists(folder)) {
+//            try {
+//                Files.createDirectories(folder);
+//            } catch (IOException e) {
+//                //fail to create directory
+//                e.printStackTrace();
+//            }
+//        }
+//
+//		LocalDate date1 = LocalDate.now();
+//		System.out.println("Current date: " + date1);
+//
+//		// Write content
+//		BufferedWriter bw = null;
+//		FileWriter fw = null;
+//
+//		try {
+//
+//			String fileName = "Payment_" + date1.toString() + ".txt";
+//			String content = generatContentFile(tripPayment);
+//
+//			File reportFile = new File(path + "/" + fileName);
+//
+//			if (!reportFile.exists()) {
+//				reportFile.createNewFile();
+//				// true = append file
+//			}
+//
+//			fw = new FileWriter(reportFile.getAbsoluteFile(), true);
+//			bw = new BufferedWriter(fw);
+//
+//			bw.write(content);
+//
+//			System.out.println(content);
+//			
+//		} catch (IOException e) {
+//
+//			e.printStackTrace();
+//
+//		} finally {
+//
+//			try {
+//
+//				if (bw != null)
+//					bw.close();
+//
+//				if (fw != null)
+//					fw.close();
+//
+//			} catch (IOException ex) {
+//
+//				ex.printStackTrace();
+//
+//			}
+//		}
+//
 		return tripPayment;
 	}
 
