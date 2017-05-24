@@ -57,6 +57,7 @@
 	<bean id="persistenceExceptionTranslationPostProcessor"
 		class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor" />
 
-
+	<import resource="notification-producer-context.xml"/>
+ 	<import resource="notification-consumer-context.xml"/>
 
 </beans>
