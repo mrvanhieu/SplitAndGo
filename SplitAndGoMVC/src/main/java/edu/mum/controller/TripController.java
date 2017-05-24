@@ -50,7 +50,7 @@ public class TripController {
 			model.addAttribute("members", memberService.findAll());
 			return "trip/addTrip";
 		}
-		tripService.update(trip);
+		tripService.save(trip);
 		return "redirect:/trips";
 	}
 
