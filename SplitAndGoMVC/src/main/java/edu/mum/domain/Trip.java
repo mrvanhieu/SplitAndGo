@@ -54,7 +54,7 @@ public class Trip {
 			@JoinColumn(name = "member_id") })
 	List<Member> members = new ArrayList<>();
 
-	@OneToOne(mappedBy="trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToOne(mappedBy="trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@Valid
 	Fund fund;
 	

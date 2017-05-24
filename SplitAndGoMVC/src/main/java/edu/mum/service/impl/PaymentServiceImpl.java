@@ -1,34 +1,22 @@
 package edu.mum.service.impl;
 
-import edu.mum.dao.PaymentDao;
-import edu.mum.domain.Payment;
-import edu.mum.rest.service.PaymentRestService;
-import edu.mum.rest.service.ReportRestService;
-import edu.mum.service.PaymentService;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+import edu.mum.annotation.Logging;
+import edu.mum.domain.Payment;
+import edu.mum.domain.dto.PaymentDto;
+import edu.mum.rest.service.PaymentRestService;
+import edu.mum.rest.service.ReportRestService;
+import edu.mum.service.PaymentService;
 
 @Service
 @Transactional
 public class PaymentServiceImpl implements PaymentService {
-
-//	public void save(Payment payment) {
-//		paymentRestService.save(payment);
-//	}
-//
-//	public List<Payment> findAll() {
-//		return (List<Payment>) paymentRestService.findAll();
-//	}
-//
-//	public Payment findOne(Long id) {
-//		return paymentRestService.findOne(id);
-//	}
-
-	@Autowired
-	private PaymentDao paymentDao;
 
 	@Autowired
 	private PaymentRestService paymentRestService;
@@ -36,28 +24,34 @@ public class PaymentServiceImpl implements PaymentService {
 	@Autowired
 	private ReportRestService reportRestService;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void save(Payment payment) {
 		paymentRestService.save(payment);
 	}
 
-	public Payment update(Payment payment) {
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
+	public PaymentDto update(PaymentDto payment) {
 		return paymentRestService.update(payment);
 	}
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@Logging
 	public void delete(Long id) {
-		paymentDao.delete(id);
+		paymentRestService.delete(id);
 	}
 
 	public List<Payment> findAll() {
 		return (List<Payment>) paymentRestService.findAll();
 	}
 
-	public Payment findOne(Long id) {
+	public PaymentDto findOne(Long id) {
 		return paymentRestService.findOne(id);
 	}
 
-	public List<Payment> findByTripId(Long tripId) {
-		return paymentDao.findByTripId(tripId);
+	public List<PaymentDto> findByTripId(Long tripId) {
+		return paymentRestService.findByTripId(tripId);
 	}
 
 }

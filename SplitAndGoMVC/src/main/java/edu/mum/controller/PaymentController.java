@@ -13,8 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import edu.mum.domain.Payment;
-import edu.mum.domain.Trip;
+import edu.mum.domain.dto.PaymentDto;
 import edu.mum.service.PaymentService;
 import edu.mum.service.TripService;
 
@@ -41,27 +40,21 @@ public class PaymentController {
 		return "payment/paymentsDetail";
 	}
 	
-	@RequestMapping
-	public String listPayments(Model model) {
-		model.addAttribute("payments", paymentService.findAll());
-		return "payments";
-	}
-
 	@RequestMapping("/{id}")
-	public String getPaymentById(@PathVariable("id") Long id,Model model, Locale locale) {
-		Payment payment = paymentService.findOne(id);
+	public String getPaymentById(@PathVariable("id") Long id, Model model, Locale locale) {
+		PaymentDto payment = paymentService.findOne(id);
 		model.addAttribute("payment", payment);
 
 		return "payment";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
-	public String getAddNewPaymentForm(@ModelAttribute("newPayment") Payment newPayment) {
+	public String getAddNewPaymentForm(@ModelAttribute("newPayment") PaymentDto newPayment) {
 		return "payment/addPayment";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
-	public String processAddNewPaymentForm(@ModelAttribute("newPayment") @Valid Payment paymentToBeAdded, BindingResult result) {
+	public String processAddNewPaymentForm(@ModelAttribute("newPayment") @Valid PaymentDto paymentToBeAdded, BindingResult result) {
 
 		if(result.hasErrors()) {
 			return "payment/addPayment";
@@ -78,12 +71,10 @@ public class PaymentController {
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public String editPayment(@ModelAttribute("payment") @Valid Payment payment, BindingResult result) {
+	public String editPayment(@ModelAttribute("payment") @Valid PaymentDto payment, BindingResult result) {
 		if (result.hasErrors()) {
 			return "payment/editPayment";
 		}
-		Trip trip = tripService.findOne(payment.getTrip().getId());
-		payment.setTrip(trip);
 		paymentService.update(payment);
 		return "redirect:/payments/trips";
 	}

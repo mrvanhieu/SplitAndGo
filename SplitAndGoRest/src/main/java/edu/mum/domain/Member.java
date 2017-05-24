@@ -10,6 +10,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import javax.validation.Valid;
 import javax.validation.constraints.Pattern;
 
@@ -23,7 +25,7 @@ public class Member {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(length = 20)
 	@EmptyOrSize(min = 2, max = 20, message = "{size.name.validation}")
@@ -41,10 +43,11 @@ public class Member {
 	@Email
 	private String email;
 
-	@Pattern(regexp = "\\d{3}[-\\.\\s]\\d{3}[-\\.\\s]\\d{4}")
+	@Pattern(regexp = "(\\d{3}[-\\.\\s]?\\d{3}[-\\.\\s]?\\d{4})*")
 	private String phone;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date birthDate;
 
 	@OneToOne(cascade = CascadeType.ALL)
@@ -52,11 +55,11 @@ public class Member {
 	@Valid
 	Credential credential;
 
-	public long getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -123,5 +126,5 @@ public class Member {
 	public void setCredential(Credential credential) {
 		this.credential = credential;
 	}
-
+	
 }

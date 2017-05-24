@@ -2,6 +2,7 @@ package edu.mum.rest.service;
 
 import edu.mum.domain.Payment;
 import edu.mum.domain.Trip;
+import edu.mum.domain.dto.PaymentDto;
 import edu.mum.service.PaymentService;
 import edu.mum.service.TripService;
 
@@ -31,26 +32,38 @@ public class PaymentRestService {
 	@GET
 	@Path("{id: \\d+}")
 	@Produces(MediaType.APPLICATION_JSON)
-	public Payment getProductById(@PathParam("id") Long id) {
+	public PaymentDto getPaymentById(@PathParam("id") Long id) {
 		return paymentService.findOne(id);
+	}
+	
+	@GET
+	@Path("trip/{id: \\d+}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public List<PaymentDto> getPaymentsByTripId(@PathParam("id") Long id) {
+		return paymentService.findByTripId(id);
 	}
 
 	@PUT
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
-	public void savePayment(Payment payment) {
-		Trip trip = tripService.findOne(payment.getTrip().getId());
-		payment.setTrip(trip);
+	public void savePayment(PaymentDto payment) {
 		paymentService.update(payment);
 	}
 	
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces(MediaType.APPLICATION_JSON)
-	public Payment updateProduct(Payment product) {
-		return paymentService.update(product);
+	public PaymentDto updatePayment(PaymentDto payment) {
+		return paymentService.update(payment);
 	}
 
+	@DELETE
+	@Path("{id: \\d+}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	public void deletePayment(@PathParam("id") Long id) {
+		paymentService.delete(id);
+	}
+	
 	/*
 	 * Initialize the domain model/ database ... on Start
 	 */

@@ -102,6 +102,7 @@
 					<form:errors path="fund.totalAmount" cssClass="text-danger" />
 				</div>
 			</div>
+			<form:hidden path="fund.id" class="form-control" />
 			<div class="form-group">
 				<div class="control-label col-sm-4"></div>
 				<div class="col-sm-2">

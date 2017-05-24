@@ -10,6 +10,9 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Transient;
+
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import edu.mum.validation.EmptyOrSize;
 
@@ -18,19 +21,22 @@ public class Credential {
 
 	@Id
 	@EmptyOrSize(min = 4, max = 20, message = "{size.name.validation}")
-	String username;
+	private String username;
 	
 	@EmptyOrSize(min = 4, max = 100, message = "{size.password.validation}")
-	String password;
+	private String password;
 	
-	Boolean enabled;
+	private Boolean enabled = Boolean.TRUE;
 
 	@OneToOne(mappedBy = "credential", cascade = CascadeType.PERSIST)
 	private Member member;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "username")
-	List<Authority> authority = new ArrayList<Authority>();
+	private List<Authority> authorities = new ArrayList<Authority>();
+	
+	@Transient
+	private List<String> authorityList = new ArrayList<>();
 
 	public String getUsername() {
 		return username;
@@ -45,7 +51,8 @@ public class Credential {
 	}
 
 	public void setPassword(String password) {
-		this.password = password;
+		BCryptPasswordEncoder bcryptEncoder = new BCryptPasswordEncoder();
+		this.password = bcryptEncoder.encode(password);
 	}
 
 	public Boolean getEnabled() {
@@ -56,12 +63,16 @@ public class Credential {
 		this.enabled = enabled;
 	}
 
-	public List<Authority> getAuthority() {
-		return authority;
+	public List<Authority> getAuthorities() {
+		return authorities;
 	}
 
-	public void setAuthority(List<Authority> authority) {
-		this.authority = authority;
+	public void setAuthorities(List<Authority> authorities) {
+		this.authorities = authorities;
+	}
+	
+	public void addAuthority(Authority authority) {
+		authorities.add(authority);
 	}
 
 	public Member getMember() {
@@ -72,4 +83,11 @@ public class Credential {
 		this.member = member;
 	}
 
+	public List<String> getAuthorityList() {
+		return authorityList;
+	}
+
+	public void setAuthorityList(List<String> authorityList) {
+		this.authorityList = authorityList;
+	}
 }
