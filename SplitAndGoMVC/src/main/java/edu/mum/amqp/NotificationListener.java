@@ -1,16 +1,17 @@
 package edu.mum.amqp;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 import edu.mum.domain.Notification;
 import edu.mum.domain.NotificationMessage;
 import edu.mum.service.NotificationService;
-import edu.mum.service.impl.NotificationServiceImpl;
 
 public class NotificationListener {
 
+	@Autowired
 	private NotificationService notificationService;
 
 	public void listen(NotificationMessage notification) {
-		notificationService = new NotificationServiceImpl();
 		try {
 			Notification entity = new Notification();
 			System.out.println(notification.getAction());

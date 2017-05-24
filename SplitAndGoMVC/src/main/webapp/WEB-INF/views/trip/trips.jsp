@@ -3,6 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="security"
+	uri="http://www.springframework.org/security/tags"%>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -20,10 +22,12 @@
 
 	<div class="container">
 		<div class="row">
+			<security:authorize access="hasRole('ROLE_ADMIN')">
 			<a href="<spring:url value='/trips/addTrip/'/>" class="btn btn-default btn-sm">
 				<span class="glyphicon glyphicon-plus-sign"></span>
 				<spring:message code="trip.button.addtrip" />
 			</a>
+			</security:authorize>
 		</div>
 		<br />
 		<table class="table table-hover">
@@ -44,11 +48,11 @@
 						<td>${trip.startDate}</td>
 						<td>${trip.endDate}</td>
 						<td>${trip.fund.totalAmount}
-						<td><a
+						<td><security:authorize access="hasRole('ROLE_ADMIN')"><a
 							href="<spring:url value='/trips/editTrip/${trip.id}'/>"><span
 								class="glyphicon glyphicon-pencil"></span> </a>| <a
 							href='javascript:deleteTrip(${trip.id})'><span
-								class="glyphicon glyphicon-trash"></span></a></td>
+								class="glyphicon glyphicon-trash"></span></a></security:authorize></td>
 					</tr>
 				</c:forEach>
 			</tbody>

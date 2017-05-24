@@ -53,7 +53,7 @@
 
 	<!-- Scan for transaction-based resources -->
 	<context:component-scan
-		base-package="edu.mum.service,edu.mum.rest,edu.mum.dao,edu.mum.aspect" />
+		base-package="edu.mum.service,edu.mum.rest,edu.mum.dao,edu.mum.aspect,edu.mum.amqp" />
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
