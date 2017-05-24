@@ -1,9 +1,7 @@
 package edu.mum.rest.service.impl;
 
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -39,11 +37,7 @@ public class PaymentRestServiceImpl extends GenericRestServiceImpl implements Pa
 	public void delete(Long id) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		HttpEntity<?> httpEntity = new HttpEntity<Object>(remoteApi.getHttpHeaders());
-		try {
-			restTemplate.exchange(host + "/payments/" + id, HttpMethod.DELETE, httpEntity, Void.class);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		restTemplate.exchange(host + "/payments/" + id, HttpMethod.DELETE, httpEntity, Void.class);
 	}
 	
 	public PaymentDto findOne(Long id) {

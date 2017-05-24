@@ -1,5 +1,6 @@
 package edu.mum.domain.dto;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.Temporal;
@@ -10,7 +11,12 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import edu.mum.validation.EmptyOrSize;
 
-public class PaymentDto {
+public class PaymentDto implements Serializable {
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 	private long id;
 

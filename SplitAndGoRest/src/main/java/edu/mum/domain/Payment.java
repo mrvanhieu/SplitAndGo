@@ -1,8 +1,6 @@
 package edu.mum.domain;
 
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,12 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
-import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import edu.mum.validation.EmptyOrSize;
@@ -28,16 +24,18 @@ public class Payment {
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long id;
 
-	@Column(length = 200)
+	@Column(length = 200, nullable = false)
 	@EmptyOrSize(min = 4, max = 200, message = "{size.name.validation}")
 	private String description;
 
 	@NotNull(message = "{notnull}")
+	@Column(nullable = false)
 	private Double amount;
 
 	@Temporal(TemporalType.DATE)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	@NotEmpty(message = "{notempty}")
+	@NotNull(message = "{notnull}")
+	@Column(nullable = false)
 	private Date date;
 
 //	@OneToMany(mappedBy = "payment", cascade = { CascadeType.PERSIST, CascadeType.MERGE })

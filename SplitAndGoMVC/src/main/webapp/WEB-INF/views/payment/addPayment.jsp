@@ -59,6 +59,12 @@
 			$("#invalidPaymentInputDialog").dialog("open");
 			return;
 		}
+		var date = $('#date').val();
+		if (!date) {
+			$("#invalidPaymentInputDialog").html("<spring:message code='payment.dialog.invaliddate.content'/>");
+			$("#invalidPaymentInputDialog").dialog("open");
+			return;
+		}
 		var amount = $('#amount').val();
 		if (!amount || parseInt(amount) < 0) {
 			$("#invalidPaymentInputDialog").html("<spring:message code='payment.dialog.invalidamount.content'/>");
