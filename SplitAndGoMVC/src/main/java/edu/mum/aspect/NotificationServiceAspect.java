@@ -1,5 +1,6 @@
 package edu.mum.aspect;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
@@ -89,8 +90,9 @@ public class NotificationServiceAspect {
 	private String buildNotificationDescription(Payment payment, String userName, String action) {
 
 		String tripId = payment.getTrip().getId() != null ? String.valueOf(payment.getTrip().getId()) : " ";
+		String date =  (new SimpleDateFormat ("yyyy-MM-dd")).format(payment.getDate());
 
-		return "Trip Id: " + tripId + " Date: " + payment.getDate().toString() + " " + userName + " " + action
+		return "Trip Id: " + tripId + " Date: " + date + " " + userName.toUpperCase() + " " + action.toUpperCase()
 				+ " Payment Amout :"
 				+ payment.getAmount() + " for " + payment.getDescription() + "\r\n";
 	}

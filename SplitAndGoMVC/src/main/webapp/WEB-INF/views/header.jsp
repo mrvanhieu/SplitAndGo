@@ -84,6 +84,7 @@ $(document).ready(function() {
 });
 setInterval(getNotification, 3000);
 function getNotification(){
+	<security:authorize access="isAuthenticated()">
 			$.ajax({
 				type : 'GET',
 				url : "<spring:url value='/notifications'/>",
@@ -100,6 +101,7 @@ function getNotification(){
 					//alert("error");
 				}
 			});
+	</security:authorize>
 }
 
 

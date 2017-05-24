@@ -37,6 +37,7 @@ public class NotificationController {
 		//Get all notification of logged-in user
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		boolean isAuthenticated = auth.isAuthenticated();
+
 		String userName = auth.getName();
 
 		List<Notification> dbNotifications = notificationService.findAll();
