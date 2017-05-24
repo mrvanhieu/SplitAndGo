@@ -45,7 +45,9 @@ public class LoggingAspect {
 			Member member = (Member) object;
 			LOG.warn(member.getId() + " - " + member.getFirstName() + " " + member.getLastName() + " - "
 					+ member.getEmail() + " - " + member.getPhone());
+		} else if (object instanceof Long) {
+			Long id = (Long) object;
+			LOG.warn(id);
 		}
-
 	}
 }

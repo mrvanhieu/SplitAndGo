@@ -22,7 +22,8 @@ public class TripServiceImpl implements TripService {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Logging
 	public void save(Trip trip) {
-		tripDao.save(trip);
+		// member is detached during creating a new trip
+		tripDao.update(trip);
 	}
 
 	public List<Trip> findAll() {

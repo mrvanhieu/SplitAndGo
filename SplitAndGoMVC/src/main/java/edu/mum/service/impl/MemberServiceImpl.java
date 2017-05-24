@@ -30,7 +30,7 @@ public class MemberServiceImpl implements MemberService {
 	@Logging
 	public void save(Member member) {
 		updateAuthorities(member.getCredential().getAuthorityList(), member.getCredential().getAuthorities());
-		memberDao.save(member);
+		memberDao.update(member); // credential is detached during creating
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
