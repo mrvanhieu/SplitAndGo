@@ -19,8 +19,17 @@
 		</rabbit:bindings>
 	</rabbit:direct-exchange>
 
-   <!-- **************** DIRECT PRODUCER  -->
-    <rabbit:template id="directTemplate" connection-factory="connectionFactory"
-                     reply-timeout="2000" routing-key="payment.key"
-                     exchange="direct" />
+	<!-- **************** DIRECT PRODUCER -->
+	<rabbit:template id="directTemplate"
+		connection-factory="connectionFactory" reply-timeout="2000"
+		routing-key="payment.key" exchange="direct" />
+		
+	<!-- **************** DIRECT CONSUMER ************************* -->
+	<rabbit:listener-container
+		connection-factory="connectionFactory">
+		<rabbit:listener ref="queueListener" method="listen"
+			queue-names="directQueue" />
+	</rabbit:listener-container>
+
+	<bean id="queueListener" class="edu.mum.amqp.NotificationListener" />
 </beans>
