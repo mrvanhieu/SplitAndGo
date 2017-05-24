@@ -7,13 +7,18 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import javax.validation.Valid;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -24,7 +29,7 @@ public class Trip {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
+	private Long id;
 
 	@Column(length = 20)
 	@EmptyOrSize(min = 2, max = 20, message = "{size.name.validation}")
@@ -36,25 +41,31 @@ public class Trip {
 
 	private Double duration;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date startDate;
 
-	@DateTimeFormat(pattern = "MM-dd-yyyy")
+	@Temporal(TemporalType.DATE)
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date endDate;
 
-	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE }, fetch = FetchType.EAGER)
 	@JoinTable(name = "trip_member", joinColumns = { @JoinColumn(name = "trip_id") }, inverseJoinColumns = {
 			@JoinColumn(name = "member_id") })
 	List<Member> members = new ArrayList<>();
 
 	@OneToOne(mappedBy="trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@Valid
 	Fund fund;
 	
-	public long getId() {
+	@OneToMany(mappedBy = "trip", cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	List<Payment> payments = new ArrayList<>();
+	
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -111,7 +122,16 @@ public class Trip {
 	}
 
 	public void setFund(Fund fund) {
+		fund.setTrip(this);
 		this.fund = fund;
+	}
+
+	public List<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(List<Payment> payments) {
+		this.payments = payments;
 	}
 
 }

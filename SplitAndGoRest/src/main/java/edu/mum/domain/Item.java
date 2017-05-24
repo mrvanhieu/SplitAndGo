@@ -32,8 +32,8 @@ public class Item {
 
 	private Integer quantity;
 
-	@ManyToOne
-	private Payment payment;
+//	@ManyToOne
+//	private Payment payment;
 
 	public long getId() {
 		return id;
@@ -83,12 +83,12 @@ public class Item {
 		this.quantity = quantity;
 	}
 
-	public Payment getPayment() {
-		return payment;
-	}
-
-	public void setPayment(Payment payment) {
-		this.payment = payment;
-	}
+//	public Payment getPayment() {
+//		return payment;
+//	}
+//
+//	public void setPayment(Payment payment) {
+//		this.payment = payment;
+//	}
 
 }

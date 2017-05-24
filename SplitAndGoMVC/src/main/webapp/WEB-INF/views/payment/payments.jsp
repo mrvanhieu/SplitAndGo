@@ -22,7 +22,7 @@
 	<div class="row">
 		<div class="form-group">
 			<div class="col-sm-2" style="padding-left:0px">
-				<select class="form-control" id="tripId">
+				<select class="form-control" id="selectTripId">
 					<option value="0"><spring:message code="payment.select" /></option>
 					<c:forEach items="${trips}" var="trip">
 						<option value="${trip.id}">${trip.name}</option>
@@ -82,8 +82,8 @@
 			      }
 				});
 				
-				$('#tripId').change(function() {
-					var selectedTripId = $('#tripId option:selected').val();
+				$('#selectTripId').change(function() {
+					var selectedTripId = $('#selectTripId option:selected').val();
 					//var selectedEntryValue = $('#entryId option:selected').val();
 					if (selectedTripId == 0) {
 						return;
@@ -105,7 +105,7 @@
 	
 
 		var loadPayments = function() {
-			var selectedTripId = $('#tripId option:selected').val();
+			var selectedTripId = $('#selectTripId option:selected').val();
 			$.ajax({
 				type : 'GET',
 				url : "<spring:url value='/payments/paymentsDetail/'/>" + selectedTripId,

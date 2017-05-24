@@ -34,7 +34,7 @@
 	</div>
 	<div class="form-group">
 		<div class="col-sm-6">
-			<form:hidden path="trip.id" class="form-control"/>
+			<form:hidden path="tripId" class="form-control"/>
 		</div>
 	</div>
 	<div class="form-group">
@@ -51,7 +51,7 @@
 <script>
 	$('#editPaymentForm').submit(function(event) {
 		event.preventDefault(); // Prevent the form from submitting via the browser
-		$('#trip\\.id').val($('#tripId option:selected').val());
+		$('#tripId').val($('#selectTripId option:selected').val());
 		var form = $(this);
 		
 		var desc = $('#description').val();

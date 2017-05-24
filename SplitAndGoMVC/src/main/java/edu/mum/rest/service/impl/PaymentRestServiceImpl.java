@@ -1,7 +1,9 @@
 package edu.mum.rest.service.impl;
 
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
 import edu.mum.domain.Payment;
+import edu.mum.domain.dto.PaymentDto;
 import edu.mum.rest.service.PaymentRestService;
 
 @Component
@@ -25,16 +28,30 @@ public class PaymentRestServiceImpl extends GenericRestServiceImpl implements Pa
 		restTemplate.put(host + "/payments/", httpEntity, Payment.class);
 	}
 	
-	public Payment update(Payment payment) {
+	public PaymentDto update(PaymentDto payment) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		HttpEntity<Payment> httpEntity = new HttpEntity<Payment>(payment, remoteApi.getHttpHeaders());
-		return restTemplate.postForObject(host + "/payments/", httpEntity, Payment.class);
+		HttpEntity<PaymentDto> httpEntity = new HttpEntity<PaymentDto>(payment, remoteApi.getHttpHeaders());
+		return restTemplate.postForObject(host + "/payments/", httpEntity, PaymentDto.class);
 	}
 	
-	public Payment findOne(Long id) {
+	public void delete(Long id) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		Payment payment =  (restTemplate.exchange(host + "/payments/"+ id, HttpMethod.GET, remoteApi.getHttpEntity(), Payment.class).getBody());
-		return payment;
+		HttpEntity<?> httpEntity = new HttpEntity<Object>(remoteApi.getHttpHeaders());
+		try {
+			restTemplate.exchange(host + "/payments/" + id, HttpMethod.DELETE, httpEntity, Void.class);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public PaymentDto findOne(Long id) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		return restTemplate.exchange(host + "/payments/" + id, HttpMethod.GET, remoteApi.getHttpEntity(), PaymentDto.class).getBody();
+	}
+	
+	public List<PaymentDto> findByTripId(Long tripId) {
+		RestTemplate restTemplate = remoteApi.getRestTemplate();
+		return Arrays.asList(restTemplate.exchange(host + "/payments/trip/" + tripId, HttpMethod.GET, remoteApi.getHttpEntity(), PaymentDto[].class).getBody());
 	}
 
 }
