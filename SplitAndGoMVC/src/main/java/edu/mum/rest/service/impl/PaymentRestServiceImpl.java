@@ -10,6 +10,7 @@ import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import edu.mum.annotation.Notification;
 import edu.mum.domain.Payment;
 import edu.mum.domain.dto.PaymentDto;
 import edu.mum.rest.service.PaymentRestService;
@@ -22,12 +23,13 @@ public class PaymentRestServiceImpl extends GenericRestServiceImpl implements Pa
 		return Arrays.asList(restTemplate.exchange(host + "/payments/", HttpMethod.GET, remoteApi.getHttpEntity(), Payment[].class).getBody());
 	}
 
+	@Notification
 	public void save(Payment payment) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		HttpEntity<Payment> httpEntity = new HttpEntity<Payment>(payment, remoteApi.getHttpHeaders());
 		restTemplate.put(host + "/payments/", httpEntity, Payment.class);
 	}
-	
+	@Notification
 	public PaymentDto update(PaymentDto payment) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
 		HttpEntity<PaymentDto> httpEntity = new HttpEntity<PaymentDto>(payment, remoteApi.getHttpHeaders());

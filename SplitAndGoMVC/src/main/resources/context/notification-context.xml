@@ -24,7 +24,8 @@
 	<!-- **************** DIRECT CONSUMER ************************* -->
 	<rabbit:listener-container
 		connection-factory="connectionFactory">
-		<rabbit:listener ref="queueListener" method="listen"
+		<rabbit:listener ref="queueListener" 
+			method="listen"
 			queue-names="directQueue" />
 	</rabbit:listener-container>
 

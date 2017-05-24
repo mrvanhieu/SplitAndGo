@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import edu.mum.annotation.Logging;
+import edu.mum.annotation.Notification;
 import edu.mum.domain.Payment;
 import edu.mum.domain.dto.PaymentDto;
 import edu.mum.rest.service.PaymentRestService;
@@ -26,12 +27,14 @@ public class PaymentServiceImpl implements PaymentService {
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Logging
+	@Notification
 	public void save(Payment payment) {
 		paymentRestService.save(payment);
 	}
 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Logging
+	@Notification
 	public PaymentDto update(PaymentDto payment) {
 		return paymentRestService.update(payment);
 	}
