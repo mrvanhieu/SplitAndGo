@@ -50,5 +50,11 @@ public class RestHttpHeader {
 		return new HttpEntity(getHttpHeaders());
 	}
 
+	public HttpEntity<?> getHttpEntityStream() {
+		HttpHeaders header = getHttpHeaders();
+		header.setAccept(Collections.singletonList(MediaType.APPLICATION_OCTET_STREAM));
+		return new HttpEntity(header);
+	}
+
 }
 

@@ -1,10 +1,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
 <div class="row">
 	<a id="createPayment"  href="#" class="btn btn-default btn-sm">
 		<span class="glyphicon glyphicon-plus-sign"></span>
-		<spring:message code="trip.button.addtrip" />
+		<spring:message code="payment.button.addpayment" />
 	</a>
 </div>
 
@@ -23,7 +24,7 @@
 			<tr>
 				<td>${loop.index + 1}</td>
 				<td>${payment.description}</td>
-				<td>${payment.date}</td>
+				<td><fmt:formatDate value="${payment.date}" pattern="yyyy-MM-dd" /></td>
 				<td>${payment.amount}</td>
 				<td><a href='javascript:editPayment(${payment.id})'><span
 						class="glyphicon glyphicon-pencil"></span> </a>| <a
