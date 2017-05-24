@@ -34,7 +34,7 @@
 					<li><a href="<spring:url value="/members" />"><spring:message
 								code="menu.membermanagement" /></a></li>
 					</security:authorize>
-					<li><a href="<spring:url value="/payments/trips" />"><spring:message
+					<li><a href="<spring:url value="/payments" />"><spring:message
 								code="menu.payment" /></a></li>
 
 					<li><a href="<spring:url value="/paymentReports" />"><spring:message
@@ -97,7 +97,7 @@ function getNotification(){
 				},
 				error : function(e) {
 					//alert(e.responseJSON["message"]);
-					alert("error");
+					//alert("error");
 				}
 			});
 }

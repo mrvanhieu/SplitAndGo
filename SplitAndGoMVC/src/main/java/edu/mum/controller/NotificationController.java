@@ -35,8 +35,9 @@ public class NotificationController {
 	@RequestMapping
 	public String listReports(@ModelAttribute("notifications") List<Notification> notifications,  Model model) {
 		//Get all notification of logged-in user
-//		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-//		String userName = auth.getName();
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		boolean isAuthenticated = auth.isAuthenticated();
+		String userName = auth.getName();
 
 		List<Notification> dbNotifications = notificationService.findAll();
 		if(notifications.equals(dbNotifications)){
