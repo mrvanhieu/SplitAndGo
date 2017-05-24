@@ -1,6 +1,7 @@
 package edu.mum.domain;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -20,7 +21,7 @@ public class Fund {
 	@NullMinNumber(value = 0, message = "{nullminnumber}")
 	private Double totalAmount;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	private Trip trip;
 	
 	public long getId() {
