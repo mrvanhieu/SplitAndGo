@@ -2,6 +2,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<link href="webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 
 <div class="container">
 	<h1>
@@ -54,3 +60,47 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
+
+<div id="notificationDialog">
+
+</div>
+
+<script>
+$(document).ready(function() {
+	$(function() {
+		$("#notificationDialog").dialog({
+			title : '<spring:message code="notification.message" />',
+			autoOpen : false,
+			height : "auto",
+			width : "auto",
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+		  	}
+		});
+	})
+});
+setInterval(getNotification, 5000);
+function getNotification(){
+			$.ajax({
+				type : 'GET',
+				url : "<spring:url value='/notifications'/>",
+				success : function(data) {
+					//$('#paymentsDetail').html(data);
+					if(data != ""){
+						//alert (data);
+						$("#notificationDialog").html(data);
+						$("#notificationDialog").dialog("open");
+					}
+				},
+				error : function(e) {
+					//alert(e.responseJSON["message"]);
+					alert("error");
+				}
+			});
+}
+
+
+</script>

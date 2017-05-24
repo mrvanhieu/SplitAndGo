@@ -9,5 +9,5 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class GenericRestServiceImpl {
     @Autowired
     RestHttpHeader remoteApi;
-    String host = "http://localhost:8080/SplitAndGoRest/rest";
+    String host = "http://localhost:9099/SplitAndGoRest/rest";
 }

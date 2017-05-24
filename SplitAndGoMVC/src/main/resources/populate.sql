@@ -21,3 +21,6 @@ INSERT INTO Payment (`id`, `amount`, `date`, `description`, trip_id) VALUES ('5'
 INSERT INTO Payment (`id`, `amount`, `date`, `description`, trip_id) VALUES ('6', '200', '2017-07-07', 'First payment', '2')
 INSERT INTO Payment (`id`, `amount`, `date`, `description`, trip_id) VALUES ('7', '100', '2017-08-08', 'Third payment', '2');
 INSERT INTO Payment (`id`, `amount`, `date`, `description`, trip_id) VALUES ('8', '200', '2017-08-08', 'Fourth payment', '2')
+
+INSERT INTO Notification (`id`, `action`, `date`, `description`, `userName`) VALUES ('1', 'Add', '2017-05-24', 'A payment', 'guest');
+INSERT INTO Notification (`id`, `action`, `date`, `description`, `userName`) VALUES ('2', 'Edit', '2017-05-24', 'A payment change', 'admin');
