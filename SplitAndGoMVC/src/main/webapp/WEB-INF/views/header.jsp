@@ -82,7 +82,7 @@ $(document).ready(function() {
 		});
 	})
 });
-setInterval(getNotification, 5000);
+setInterval(getNotification, 3000);
 function getNotification(){
 			$.ajax({
 				type : 'GET',
