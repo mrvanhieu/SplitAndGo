@@ -42,7 +42,7 @@ public class NotificationController {
 
 		List<Notification> dbNotifications = notificationService.findAll();
 		if(notifications.equals(dbNotifications)){
-			System.out.println("Info already sent to User, skip the sending");
+//			System.out.println("Info already sent to User, skip the sending");
 			model.addAttribute("notificationResults",null);
 		}else{
 			notifications = dbNotifications;

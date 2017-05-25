@@ -82,6 +82,7 @@ $(document).ready(function() {
 		});
 	})
 });
+
 setInterval(getNotification, 3000);
 function getNotification(){
 	<security:authorize access="isAuthenticated()">
