@@ -59,7 +59,7 @@ public class PaymentController {
 		if(result.hasErrors()) {
 			return "payment/addPayment";
 		}
-		paymentService.update(paymentToBeAdded);
+		paymentService.save(paymentToBeAdded);
 		
 		return "payment/payments";
 	}
