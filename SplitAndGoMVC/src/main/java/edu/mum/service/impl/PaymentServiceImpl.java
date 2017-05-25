@@ -28,7 +28,7 @@ public class PaymentServiceImpl implements PaymentService {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@Logging
 	@Notification
-	public void save(Payment payment) {
+	public void save(PaymentDto payment) {
 		paymentRestService.save(payment);
 	}
 

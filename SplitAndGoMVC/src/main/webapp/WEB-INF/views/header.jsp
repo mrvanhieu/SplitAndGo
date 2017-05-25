@@ -2,6 +2,12 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="security"
 	uri="http://www.springframework.org/security/tags"%>
+<link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />
+<link href="webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+
+<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 
 <div class="container">
 	<h1>
@@ -28,7 +34,7 @@
 					<li><a href="<spring:url value="/members" />"><spring:message
 								code="menu.membermanagement" /></a></li>
 					</security:authorize>
-					<li><a href="<spring:url value="/payments/trips" />"><spring:message
+					<li><a href="<spring:url value="/payments" />"><spring:message
 								code="menu.payment" /></a></li>
 
 					<li><a href="<spring:url value="/paymentReports" />"><spring:message
@@ -54,3 +60,50 @@
 	</div>
 	<!-- /.container-fluid -->
 </nav>
+
+<div id="notificationDialog">
+
+</div>
+
+<script>
+$(document).ready(function() {
+	$(function() {
+		$("#notificationDialog").dialog({
+			title : '<spring:message code="notification.message" />',
+			autoOpen : false,
+			height : "auto",
+			width : "auto",
+			modal: true,
+			buttons: {
+				Ok: function() {
+					$(this).dialog("close");
+				}
+		  	}
+		});
+	})
+});
+
+setInterval(getNotification, 3000);
+function getNotification(){
+	<security:authorize access="isAuthenticated()">
+			$.ajax({
+				type : 'GET',
+				url : "<spring:url value='/notifications'/>",
+				success : function(data) {
+					//$('#paymentsDetail').html(data);
+					if(data != ""){
+						//alert (data);
+						$("#notificationDialog").html(data);
+						$("#notificationDialog").dialog("open");
+					}
+				},
+				error : function(e) {
+					//alert(e.responseJSON["message"]);
+					//alert("error");
+				}
+			});
+	</security:authorize>
+}
+
+
+</script>

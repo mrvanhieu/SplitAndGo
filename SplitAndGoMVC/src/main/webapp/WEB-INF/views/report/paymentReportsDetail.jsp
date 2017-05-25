@@ -15,7 +15,7 @@
 			<tr>
 				<td>${loop.index + 1}</td>
 				<td>${paymentReport.date}</td>
-				<td><a name="View Sample Report"
+				<td><a name="Download"
 					   href="<spring:url value='/paymentReports/${paymentReport.id}/${paymentReport.date}'/>">Download</a></td>
 			</tr>
 		</c:forEach>

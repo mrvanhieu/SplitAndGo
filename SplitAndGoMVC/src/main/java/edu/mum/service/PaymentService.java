@@ -7,7 +7,7 @@ import edu.mum.domain.dto.PaymentDto;
 
 public interface PaymentService {
 
-	public void save(Payment payment);
+	public void save(PaymentDto payment);
 
 	public PaymentDto update(PaymentDto payment);
 

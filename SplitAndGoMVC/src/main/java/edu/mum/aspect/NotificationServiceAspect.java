@@ -1,8 +1,10 @@
 package edu.mum.aspect;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.aspectj.lang.JoinPoint;
+import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.aspectj.lang.annotation.Pointcut;
@@ -48,7 +50,8 @@ public class NotificationServiceAspect {
 	public void withArgs(Object payment) {
 	}
 
-	@Before("withAnnotation() && serviceMethod() && withArgs(payment)")
+	//@Before("withAnnotation() && serviceMethod() && withArgs(payment)")
+	@AfterReturning("withAnnotation() && serviceMethod() && withArgs(payment)")
 	public void sendNotification(JoinPoint joinpoint, Object payment) {
 
 		Payment paymentTemp = null;
@@ -59,7 +62,7 @@ public class NotificationServiceAspect {
 			paymentTemp.setDescription(((PaymentDto) payment).getDescription());
 			Trip trip = new Trip();
 			trip.setId(((PaymentDto) payment).getTripId());
-			paymentTemp.setTrip(new Trip());
+			paymentTemp.setTrip(trip);
 
 		}else{
 			paymentTemp = (Payment) payment;
@@ -75,8 +78,8 @@ public class NotificationServiceAspect {
 		notification.setUserName(userName);
 		notification.setAction(methodInvoke);
 		notification.setDate(new Date());
-		System.out.println(buildNotificationDescription(paymentTemp));
-		notification.setDescription(buildNotificationDescription(paymentTemp));
+		System.out.println(buildNotificationDescription(paymentTemp,userName,methodInvoke));
+		notification.setDescription(buildNotificationDescription(paymentTemp,userName,methodInvoke));
 		try {
 			notificationService.publish(directTemplate, notification);
 		} catch (RuntimeException exception) {
@@ -84,8 +87,13 @@ public class NotificationServiceAspect {
 		}
 	}
 
-	private String buildNotificationDescription(Payment payment) {
-		return "Trip Id: " + payment.getTrip().getId() + " Date: " + payment.getDate().toString() + " Payment Amout :"
+	private String buildNotificationDescription(Payment payment, String userName, String action) {
+
+		String tripId = payment.getTrip().getId() != null ? String.valueOf(payment.getTrip().getId()) : " ";
+		String date =  (new SimpleDateFormat ("yyyy-MM-dd")).format(payment.getDate());
+
+		return "Trip Id: " + tripId + " Date: " + date + " " + userName.toUpperCase() + " " + action.toUpperCase()
+				+ " Payment Amout :"
 				+ payment.getAmount() + " for " + payment.getDescription() + "\r\n";
 	}
 }

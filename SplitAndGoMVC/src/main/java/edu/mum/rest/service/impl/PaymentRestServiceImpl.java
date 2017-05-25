@@ -22,10 +22,10 @@ public class PaymentRestServiceImpl extends GenericRestServiceImpl implements Pa
 	}
 
 	@Notification
-	public void save(Payment payment) {
+	public void save(PaymentDto payment) {
 		RestTemplate restTemplate = remoteApi.getRestTemplate();
-		HttpEntity<Payment> httpEntity = new HttpEntity<Payment>(payment, remoteApi.getHttpHeaders());
-		restTemplate.put(host + "/payments/", httpEntity, Payment.class);
+		HttpEntity<PaymentDto> httpEntity = new HttpEntity<PaymentDto>(payment, remoteApi.getHttpHeaders());
+		restTemplate.put(host + "/payments/", httpEntity, PaymentDto.class);
 	}
 	@Notification
 	public PaymentDto update(PaymentDto payment) {

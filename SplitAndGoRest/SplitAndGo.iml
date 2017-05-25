@@ -118,7 +118,7 @@
     <orderEntry type="library" name="Maven: org.codehaus.jettison:jettison:1.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.batch:spring-batch-infrastructure:2.2.0.RELEASE" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.retry:spring-retry:1.1.2.RELEASE" level="project" />
-    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.1" level="project" />
+    <orderEntry type="library" name="Maven: org.quartz-scheduler:quartz:2.2.2" level="project" />
     <orderEntry type="library" name="Maven: c3p0:c3p0:0.9.1.1" level="project" />
     <orderEntry type="module" module-name="batch" />
     <orderEntry type="library" name="Maven: org.springframework:spring-oxm:4.2.4.RELEASE" level="project" />

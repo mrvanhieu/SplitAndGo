@@ -10,9 +10,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>trips</title>
 
-<link href="../webjars/bootstrap/3.3.7/css/bootstrap.min.css"
+<link href="webjars/bootstrap/3.3.7/css/bootstrap.min.css"
 	rel="stylesheet" />
-<link href="../webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
+<link href="webjars/jquery-ui/1.12.1/jquery-ui.min.css" rel="stylesheet" />
 
 </head>
 <body>
@@ -49,9 +49,9 @@
 		<input type="hidden" id="paymentId">
 	</div>
 	
-	<script src="../webjars/jquery/3.1.1/jquery.min.js"></script>
-	<script src="../webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script src="../webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
+	<script src="webjars/jquery/3.1.1/jquery.min.js"></script>
+	<script src="webjars/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<script src="webjars/jquery-ui/1.12.1/jquery-ui.min.js"></script>
 	
 	<script>
 		$(document).ready(function() {

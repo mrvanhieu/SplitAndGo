@@ -27,7 +27,7 @@ public class PaymentController {
 	@Autowired
 	private TripService tripService;
 
-	@RequestMapping("/trips")
+	@RequestMapping()
 	public String getTripsForPaymentDisplay(Model model) {
 		// TODO: get available list based on login user
 		model.addAttribute("trips", tripService.findAll());
@@ -59,7 +59,7 @@ public class PaymentController {
 		if(result.hasErrors()) {
 			return "payment/addPayment";
 		}
-		paymentService.update(paymentToBeAdded);
+		paymentService.save(paymentToBeAdded);
 		
 		return "payment/payments";
 	}
@@ -76,13 +76,13 @@ public class PaymentController {
 			return "payment/editPayment";
 		}
 		paymentService.update(payment);
-		return "redirect:/payments/trips";
+		return "redirect:/payments";
 	}
 	
 	@RequestMapping(value = "/delete/{id}") 
 	public String deletePayment(@PathVariable("id") Long paymentId) {
 		paymentService.delete(paymentId);
-		return "redirect:/payments/trips";
+		return "redirect:/payments";
 	}
 	
 }

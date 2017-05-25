@@ -7,7 +7,7 @@ import java.util.List;
 
 public interface PaymentRestService {
 
-	public void save(Payment payment);
+	public void save(PaymentDto payment);
 	
 	public PaymentDto update(PaymentDto payment);
 	

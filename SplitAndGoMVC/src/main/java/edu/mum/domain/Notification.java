@@ -66,6 +66,28 @@ public class Notification {
 	public void setDate(Date date) {
 		this.date = date;
 	}
-	
 
+	@Override
+	public boolean equals(Object o) {
+		if (this == o) return true;
+		if (o == null || getClass() != o.getClass()) return false;
+
+		Notification that = (Notification) o;
+
+		if (id != null ? !id.equals(that.id) : that.id != null) return false;
+		if (userName != null ? !userName.equals(that.userName) : that.userName != null) return false;
+		if (action != null ? !action.equals(that.action) : that.action != null) return false;
+		if (description != null ? !description.equals(that.description) : that.description != null) return false;
+		return date != null ? date.equals(that.date) : that.date == null;
+	}
+
+	@Override
+	public int hashCode() {
+		int result = id != null ? id.hashCode() : 0;
+		result = 31 * result + (userName != null ? userName.hashCode() : 0);
+		result = 31 * result + (action != null ? action.hashCode() : 0);
+		result = 31 * result + (description != null ? description.hashCode() : 0);
+		result = 31 * result + (date != null ? date.hashCode() : 0);
+		return result;
+	}
 }
