@@ -44,7 +44,7 @@ public class ReportRestService {
 
 		//2017-05-23
 		//Payment_2017-05-23.txt
-		String fileFolder = reportOutput + tripId+"/";
+		String fileFolder = reportOutput + File.separator + tripId + File.separator;
 		String fileName = "Payment_"+date+".txt";
 		String fileLocation = fileFolder + fileName;
 		Response response = null;
