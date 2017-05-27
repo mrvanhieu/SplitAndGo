@@ -22,7 +22,13 @@
 
 	<gateway id="notificationExecutionsListener"
 		service-interface="org.springframework.batch.core.JobExecutionListener"
-		default-request-channel="jobRestarts" />
+		default-request-channel="jobExecutions" />
+		
+	<channel id="jobExecutions" />
+
+	<router input-channel="jobExecutions">
+		<beans:bean class="edu.mum.integration.JobExecutionsRouter" />
+	</router>
 		
 	<channel id="jobRestarts" />
 	
@@ -32,6 +38,15 @@
 	</chain>
 	
 	<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />
+	
+	<channel id="mailChannel" />
+
+	<beans:bean id="emailService" class="edu.mum.service.EmailService" />
+	<chain input-channel="mailChannel">
+		<service-activator id="emailActivator" ref="emailService" />
+		<mail:outbound-channel-adapter id="emailSender"
+			mail-sender="mailSender" />
+	</chain>
 	
 	<!-- 
 
