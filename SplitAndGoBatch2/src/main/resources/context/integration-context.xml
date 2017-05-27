@@ -22,9 +22,18 @@
 
 	<gateway id="notificationExecutionsListener"
 		service-interface="org.springframework.batch.core.JobExecutionListener"
-		default-request-channel="jobExecutions" />
+		default-request-channel="jobRestarts" />
 		
-		
+	<channel id="jobRestarts" />
+	
+	<chain input-channel="jobRestarts">
+		<delayer id="wait10sec" default-delay="5000" />
+		<service-activator id="jobRestartActivator" ref="jobRestartActivator           " />
+	</chain>
+	
+	<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />
+	
+	<!-- 
 
 	<channel id="jobExecutions" />
 
@@ -41,13 +50,10 @@
 			mail-sender="mailSender" />
 	</chain>
 
+ -->
 
-	<channel id="jobRestarts" />
 
-	<chain input-channel="jobRestarts">
-		<delayer id="wait10sec" default-delay="5000" />
-		<service-activator id="jobRestartActivator" ref="emailService" />
-	</chain>
+	
 
 <!--
 	 <transformer id="mailBodyTransformer" ref="executionsToMailTransformer" 
