@@ -54,7 +54,7 @@
     </bean>
 
    <!-- Scan for  transaction-based resources -->
-   	<context:component-scan base-package="edu.mum.service,edu.mum.dao, org.springframework.batch.core.job" />
+   	<context:component-scan base-package="edu.mum.service, edu.mum.rest, edu.mum.dao, org.springframework.batch.core.job" />
   
     <tx:annotation-driven transaction-manager="transactionManager"/>
  
