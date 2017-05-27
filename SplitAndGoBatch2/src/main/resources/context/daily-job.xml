@@ -62,6 +62,8 @@
 		<beans:property name="jobRegistry" ref="jobRegistry" />
 	</beans:bean>
 
+ 
+   
 	<beans:bean id="jobRegistry"
 		class="org.springframework.batch.core.configuration.support.MapJobRegistry" />
 	<!-- run every 10 seconds -->

@@ -28,7 +28,7 @@
 	
 	<chain input-channel="jobRestarts">
 		<delayer id="wait10sec" default-delay="5000" />
-		<service-activator id="jobRestartActivator" ref="jobRestartActivator" />
+		<service-activator id="jobRestartActivator" ref="jobRestartActivator           " />
 	</chain>
 	
 	<beans:bean id="jobRestartActivator" class="edu.mum.batch.JobRestart" />
