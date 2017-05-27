@@ -3,20 +3,29 @@ package edu.mum.rest.service;
 import edu.mum.domain.Payment;
 import edu.mum.service.PaymentService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
 
-import javax.ws.rs.*;
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.File;
 import java.util.List;
 
 @Component
+@PropertySource("classpath:application.properties")
 @Path("/reports")
 public class ReportRestService {
 
 	@Autowired
 	private PaymentService paymentService;
+
+	@Value("${output}")
+	private String reportOutput;
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -35,7 +44,7 @@ public class ReportRestService {
 
 		//2017-05-23
 		//Payment_2017-05-23.txt
-		String fileFolder = "/Users/hieuho/Downloads/outputs/" + tripId+"/";
+		String fileFolder = reportOutput + tripId+"/";
 		String fileName = "Payment_"+date+".txt";
 		String fileLocation = fileFolder + fileName;
 		Response response = null;
